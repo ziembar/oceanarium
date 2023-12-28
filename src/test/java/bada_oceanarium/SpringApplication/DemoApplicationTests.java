@@ -1,4 +1,4 @@
-package bada_oceanarium.demo;
+package bada_oceanarium.SpringApplication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
