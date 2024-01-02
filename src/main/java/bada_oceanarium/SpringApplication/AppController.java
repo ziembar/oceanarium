@@ -1,5 +1,8 @@
 package bada_oceanarium.SpringApplication;
 
+import bada_oceanarium.SpringApplication.DAOs.AdresyDAO;
+import bada_oceanarium.SpringApplication.DTOs.AdresyDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +13,14 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Configuration
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class AppController implements WebMvcConfigurer {
+
+    @Autowired
+    private AdresyDAO adresyDAO;
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/").setViewName("index");
@@ -42,8 +49,12 @@ public class AppController implements WebMvcConfigurer {
 
     @RequestMapping(value={"/main_admin"})
     public String showAdminPage(Model model) {
+        List<AdresyDTO> adresy = adresyDAO.list();
+        System.out.println(adresy);
+        model.addAttribute("adresy", adresy);
         return "admin/main_admin";
     }
+
     @RequestMapping(value={"/main_user"})
     public String showUserPage(Model model) {
         return "user/main_user";
