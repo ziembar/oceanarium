@@ -55,7 +55,8 @@
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc11</artifactId>
 			<version>23.2.0.0</version>
-			<scope>test</scope>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/lib/ojdbc11.jar</systemPath>
 		</dependency>
 
 		<!-- Spring Security - start -->

@@ -11,13 +11,14 @@ import java.util.List;
 @Repository
 public class AdresyDAO {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     public AdresyDAO(JdbcTemplate jdbcTemplate) {
         super();
         this.jdbcTemplate = jdbcTemplate;
     }
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
 
     public List<AdresyDTO> list(){
         String sql = "SELECT * FROM ADRESY";
