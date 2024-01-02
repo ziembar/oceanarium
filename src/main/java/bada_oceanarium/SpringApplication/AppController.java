@@ -2,6 +2,7 @@ package bada_oceanarium.SpringApplication;
 
 import bada_oceanarium.SpringApplication.DAOs.AdresyDAO;
 import bada_oceanarium.SpringApplication.DTOs.AdresyDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Configuration
