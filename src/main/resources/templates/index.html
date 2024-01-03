@@ -8,15 +8,9 @@
 
 </head>
 
-<!-- <body th:style="'background: url(/assets/img/akwarium.png) no-repeat center center fixed;'">-->
+<body style="background: url('/static/img/akwarium.png') no-repeat center center fixed;">
 
 
-<!--<style th:inline="text">-->
-<!--    body{-->
-<!--        background: url(/assets/img/img.png)-->
-<!--        no-repeat center center fixed;-->
-<!--    }-->
-<!--</style>-->
 
 
 <!-- Navigation -->
@@ -31,14 +25,15 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
 
+
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="#">About us
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Main</a>
+                    <a class="nav-link" th:href="@{/tickets}">Buy tickets</a>
                 </li>
 
                 <li class="nav-item">
@@ -59,7 +54,7 @@
     <div class="row">
         <div class="col-md-10 mt-5">
 
-            <label style="font-size:30px">Welcome to the home page!</label>
+            <label style="font-size:30px">About us</label>
             <div style="font-size:20px">If you want to login, click <a th:href="@{/login}"><b>here</b></a> or in the
                 upper right corner.
             </div>

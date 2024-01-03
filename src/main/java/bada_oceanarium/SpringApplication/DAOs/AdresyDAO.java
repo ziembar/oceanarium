@@ -23,8 +23,7 @@ public class AdresyDAO {
 
     public List<AdresyDTO> list(){
         String sql = "SELECT * FROM ADRESY";
-        List<AdresyDTO> ListAdresy = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(AdresyDTO.class));
-        System.out.println(ListAdresy);
+        List<AdresyDTO> ListAdresy = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(AdresyDTO.class));;
         return ListAdresy;
     }
 
