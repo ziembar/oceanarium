@@ -22,7 +22,7 @@ public class AppController implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("/main").setViewName("main");
+        registry.addViewController("/tickets").setViewName("tickets");
         registry.addViewController("/login").setViewName("login");
 
         registry.addViewController("/main_admin").setViewName("admin/main_admin");
@@ -57,6 +57,11 @@ public class AppController implements WebMvcConfigurer {
             String username = request.getRemoteUser();
             model.addAttribute("username", username);
             return "user/main_user";
+        }
+
+        @GetMapping("/tickets")
+        public String showTicketsPage(Model model) {
+            return "tickets";
         }
     }
 }
