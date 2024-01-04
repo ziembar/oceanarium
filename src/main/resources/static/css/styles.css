@@ -1,3 +1,68 @@
-.button {
-    font-size: 16px;
+body {
+    background: linear-gradient(135deg, #c3ecf2, #6ec6f0);
+    font-family: 'Arial', sans-serif;
+}
+.navbar-dark .navbar-brand {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.login-panel {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 5rem;
+}
+.form-control {
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+.btn-primary {
+    border: none;
+    border-radius: 2px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-image: linear-gradient(45deg, #4ca1af, #c4e0e5);
+    transition: background-image 0.3s ease;
+}
+.btn-primary:hover {
+    background-image: linear-gradient(45deg, #3a919b, #b8d9df);
+}
+.login-form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.login-form-header h2 {
+    font-size: 2rem;
+    color: #333;
+}
+.login-form-header p {
+    color: #666;
+}
+a{
+    color: #1d1d1d;
+}
+a.spin:hover{
+    -webkit-transform: rotate(360deg);
+    -webkit-transition-duration: 1s;
+    -webkit-transition-delay: 0s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+}
+a.dark:hover{
+    color: #1d1d1d
+}
+
+@media (max-width: 991px) {
+    a{
+        -webkit-transform: none ;
+    }
+
+}
+.show a:hover{
+    -webkit-transform: none ;
 }

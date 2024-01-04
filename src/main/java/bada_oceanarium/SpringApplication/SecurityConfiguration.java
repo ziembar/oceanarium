@@ -3,9 +3,7 @@ package bada_oceanarium.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,16 +19,19 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/index", "/tickets").permitAll()
+                        .requestMatchers("/", "/index", "/tickets", "/errors", "/webjars/**", "/img/**", "/css/**").permitAll()
+                        .requestMatchers("/main_admin").hasRole("ADMIN")
+                        .requestMatchers("/main_user").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/main")
                         .permitAll()
                 )
                 .logout((logout) -> {
                     logout.permitAll();
-                    logout.logoutSuccessUrl("/index");
+                    logout.logoutSuccessUrl("/login");
                 });
 
         return http.build();
