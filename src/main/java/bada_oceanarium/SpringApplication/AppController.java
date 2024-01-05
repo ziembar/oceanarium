@@ -27,6 +27,7 @@ public class AppController implements WebMvcConfigurer {
 
         registry.addViewController("/main_admin").setViewName("admin/main_admin");
         registry.addViewController("/main_user").setViewName("user/main_user");
+        registry.addViewController("/aquariums").setViewName("user/aquariums");
     }
 
     @Controller
@@ -43,21 +44,6 @@ public class AppController implements WebMvcConfigurer {
             }
         }
 
-        @GetMapping("/main_admin")
-        public String showAdminPage(Model model, HttpServletRequest request) {
-            String username = request.getRemoteUser();
-            model.addAttribute("username", username);
-            List<AdresyDTO> adresy = adresyDAO.list();
-            model.addAttribute("adresy", adresy);
-            return "admin/main_admin";
-        }
-
-        @GetMapping("/main_user")
-        public String showUserPage(Model model, HttpServletRequest request) {
-            String username = request.getRemoteUser();
-            model.addAttribute("username", username);
-            return "user/main_user";
-        }
 
         @GetMapping("/tickets")
         public String showTicketsPage(Model model) {

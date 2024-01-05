@@ -3,10 +3,21 @@ package bada_oceanarium.SpringApplication.DTOs;
 public class AkwariaDTO {
     private Long idAkwarium;
     private Long pojemnosc;
-    private Long zasolenie;
-    private Long temperatura;
-    private Long cisnienie;
+    private Double zasolenie;
+    private Double temperatura;
+    private Double cisnienie;
     private Long idOceanarium;
+    private int ileRyb;
+
+
+    public int getIleRyb() {
+        return this.ileRyb;
+    }
+
+    public void setIleRyb(int ileRyb) {
+        this.ileRyb = ileRyb;
+    }
+
 
     public Long getIdAkwarium() {
         return this.idAkwarium;
@@ -24,27 +35,27 @@ public class AkwariaDTO {
         this.pojemnosc = pojemnosc;
     }
 
-    public Long getZasolenie() {
+    public Double getZasolenie() {
         return this.zasolenie;
     }
 
-    public void setZasolenie(Long zasolenie) {
+    public void setZasolenie(Double zasolenie) {
         this.zasolenie = zasolenie;
     }
 
-    public Long getTemperatura() {
+    public Double getTemperatura() {
         return this.temperatura;
     }
 
-    public void setTemperatura(Long temperatura) {
+    public void setTemperatura(Double temperatura) {
         this.temperatura = temperatura;
     }
 
-    public Long getCisnienie() {
+    public Double getCisnienie() {
         return this.cisnienie;
     }
 
-    public void setCisnienie(Long cisnienie) {
+    public void setCisnienie(Double cisnienie) {
         this.cisnienie = cisnienie;
     }
 

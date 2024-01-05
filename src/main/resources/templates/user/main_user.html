@@ -5,36 +5,52 @@
     <title>Main User Page</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
+
 
 </head>
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">Oceanarium</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
+    <div class="container mr-2 !text-dark" style="font-weight: 500">
+        <a class="navbar-brand dark" href="/">
+            <div class="flex justify-content-center">
+                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/> <!-- Adjust the height as needed -->
+                <span class="font-weight-bold text-dark!">Oceanarium</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-white justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
+            </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/index}">Home</a>
-                </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Main
-                        <span class="sr-only">(current)</span>
+                    <a class="nav-link font-weight-bold"  href="#">Main
+                        <span class="sr-only" >(current)</span>
                     </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/aquariums}">Aquariums</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b><th:block th:text="${username}"></th:block></b></a>
                 </li>
 
+                <li>
+                    <form method="post" th:action="@{/logout}">
+
+                        <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
@@ -44,19 +60,7 @@
     <div class="row">
 
         <div class="col-md-10 mt-5">
-            <form method="post" th:action="@{/index}">
-                <div class="form-group">
-                    <div  style="font-size:30px" th:inline="text">
-                        Welcome
-                        <b><th:block th:text="${username}"></th:block></b>
-                        to the main page!
-                    </div>
-                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
-                </div>
 
-                <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
-                </button>
-            </form>
         </div>
 
     </div>
