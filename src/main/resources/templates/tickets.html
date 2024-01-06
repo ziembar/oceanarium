@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Buy Tickets</title>
-    <!-- Replace with the correct links to Bootstrap CSS, font-awesome, and animate.css -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"/>
+    <!-- Bootstrap Datepicker CSS for the datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css"/>
+    <!-- Custom Styles -->
     <style>
         body {
-            background: #f5f7fa;
-            font-family: 'Nunito', sans-serif;
+            background: #0056b3; /* Deep blue */
+            animation: breathingBackground 3s ease-in-out infinite alternate;
         }
 
         .ticket-form-container {
@@ -112,6 +115,20 @@
             background-position: right calc(.375em + .1875rem) center;
             background-size: calc(.75em + .375rem) calc(.75em + .375rem);
         }
+        @keyframes breathingBackground {
+            0% {
+                background-color: #0056b3; /* Deep blue */
+            }
+            100% {
+                background-color: #009ffd; /* Light blue */
+            }
+        }
+
+        /* Purchase panel styles */
+        .ticket-form-container {
+            /* ...existing styles... */
+        }
+
     </style>
 </head>
 <body>
@@ -157,7 +174,7 @@
                     <h2>Purchase Your Adventure</h2>
                     <p>Fill in the details to get started</p>
                 </div>
-                <form action="/addTicket" method="post" class="needs-validation" novalidate>
+                <form action="/addTicket" method="get" class="needs-validation" novalidate>
                     <div class="form-label-group">
                         <input type="number" id="idBiletu" name="idBiletu" class="form-control" placeholder="Ticket ID" required>
                         <label for="idBiletu">Ticket ID</label>
@@ -180,13 +197,22 @@
     </div>
 </div>
 
-<!-- Include scripts for Bootstrap, jQuery, and Popper.js -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- Include other scripts if necessary -->
+<!-- Datepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
+    // Initialize the datepicker for the Expiration Date field
+    $(document).ready(function(){
+        $('#dataWaznosci').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
     // Custom JavaScript for additional interactivity if necessary
 </script>
 </body>
