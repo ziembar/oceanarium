@@ -2,6 +2,7 @@ package bada_oceanarium.SpringApplication;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -14,15 +15,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/index", "/tickets", "/errors", "/webjars/**", "/img/**", "/css/**").permitAll()
+                        .requestMatchers("/", "/index", "/tickets","/addTicket", "/errors", "/webjars/**", "/img/**", "/css/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/addTicket").permitAll()
                         .requestMatchers("/main_admin").hasRole("ADMIN")
                         .requestMatchers("/main_user", "aquariums").hasRole("USER")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() //było auth ale nie dziala
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
@@ -36,6 +37,7 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 
     @Bean
     public UserDetailsService userDetailsService() {

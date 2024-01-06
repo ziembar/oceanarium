@@ -2,67 +2,83 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Buy ticket</title>
-
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
-
-
+    <title>Buy Tickets</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 
-
-
-<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
-    <div class="container !text-dark" style="font-weight: 500">
+    <div class="container mr-2 !text-dark" style="font-weight: 500">
         <a class="navbar-brand dark" href="/">
             <div class="flex justify-content-center">
-                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/> <!-- Adjust the height as needed -->
+                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
                 <span class="font-weight-bold text-dark!">Oceanarium</span>
             </div>
         </a>
         <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon text-white justify-content-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                </svg>
             </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item">
-                    <a class="nav-link spin" th:href="@{/index}">About us</a>
+                    <a class="nav-link" th:href="@{/main_user}">Main</a>
                 </li>
-
                 <li class="nav-item active">
-                    <a class="nav-link font-weight-bold spin" href="#">Buy tickets
+                    <a class="nav-link font-weight-bold" href="#">Buy Tickets
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link spin" th:href="@{/login}">Login</a></a>
-                </li>
-
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
+<div class="container mt-5">
+    <h1 class="mb-4">Available Tickets</h1>
 
+    <table class="table table-bordered">
+        <thead>
+        <tr class="table-header">
+            <th>ID</th>
+            <th>Type</th>
+            <th>Purchase Date</th>
+            <th>Expiration Date</th>
+            <th>Oceanarium ID</th>
+            <th>Scanned</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ticket : ${listaBiletow}">
+            <td th:text="${ticket.idBiletu}">ID</td>
+            <td th:text="${ticket.idTypuBiletu}">Type</td>
+            <td th:text="${ticket.dataZakupu}">Purchase Date</td>
+            <td th:text="${ticket.dataWaznosci}">Expiration Date</td>
+            <td th:text="${ticket.idOceanarium}">Oceanarium ID</td>
+            <td th:text="${ticket.czySkasowany}">Scanned</td>
+        </tr>
+        </tbody>
+    </table>
 
-
+    <div class="add-ticket-form">
+        <h2 class="mb-4">Add New Ticket</h2>
+        <form action="/addTicket" method="get">
+            <input type="number" name="idBiletu" placeholder="Ticket ID" required class="form-control mb-2"/>
+            <input type="date" name="dataWaznosci" placeholder="Expiration Date" required class="form-control mb-2"/>
+            <input type="number" name="idTypuBiletu" placeholder="Ticket Type ID" required class="form-control mb-2"/>
+            <button type="submit" class="btn btn-primary">Add Ticket</button>
+        </form>
     </div>
 </div>
-
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/script.js}"></script>
-
 </body>
 </html>
