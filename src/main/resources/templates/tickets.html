@@ -123,10 +123,7 @@
                 background-color: #009ffd; /* Light blue */
             }
         }
-
-        /* Purchase panel styles */
         .ticket-form-container {
-            /* ...existing styles... */
         }
 
     </style>
@@ -152,7 +149,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main_user}">Main</a>
+                    <a class="nav-link" th:href="@{/index}">Main</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link font-weight-bold" href="#">Buy Tickets
@@ -204,7 +201,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
-    // Initialize the datepicker for the Expiration Date field
     $(document).ready(function(){
         $('#dataWaznosci').datepicker({
             format: 'yyyy-mm-dd',
@@ -213,7 +209,7 @@
         });
     });
 
-    // Custom JavaScript for additional interactivity if necessary
+
 </script>
 </body>
 </html>

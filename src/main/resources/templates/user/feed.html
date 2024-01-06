@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oceanarium Feed</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #7dbbe6, #009ffd); /* Adjust the color values as needed */
+            font-family: 'Arial', sans-serif;
+            padding-top: 50px;
+        }
+        .container {
+            background: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .table thead th {
+            border-top: none;
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-actions .btn {
+            margin-right: 10px;
+        }
+        .actions-cell {
+            text-align: right; /* Align the action buttons and input to the right */
+        }
+        .quantity-input {
+            width: 100px; /* Set a fixed width for the quantity input */
+            margin-right: 10px; /* Add some spacing between the input and the buttons */
+            display: inline-block; /* Ensure the input displays inline with the buttons */
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
+    <div class="container mr-2 !text-dark" style="font-weight: 500">
+        <a class="navbar-brand dark" href="/">
+            <div class="flex justify-content-center">
+                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
+                <span class="font-weight-bold text-dark!">Oceanarium</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-white justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main_user}">Main</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/aquariums}">Aquariums</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link font-weight-bold"  href="#">Feed
+                        <span class="sr-only" >(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b><th:block th:text="${username}"></th:block></b></a>
+                </li>
+
+                <li>
+                    <form method="post" th:action="@{/logout}">
+
+                        <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="text-center mb-4">Available Feed</h1>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Expiration Date</th>
+            <th scope="col">Weight (kg)</th>
+            <th scope="col">Oceanarium ID</th>
+            <th scope="col">Producer ID</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="feed : ${karmy}">
+            <td th:text="${feed.idProduktu}">1</td>
+            <td th:text="${feed.nazwa}">Fish Food</td>
+            <td th:text="${feed.dataWaznosci}">2024-01-01</td>
+            <td th:text="${feed.waga}">0.5</td>
+            <td th:text="${feed.idOceanarium}">1</td>
+            <td th:text="${feed.idProducenta}">100</td>
+            <td class="action-cell">
+                <input type="number" class="quantity-input" placeholder="Qty" min="0">
+                <button class="btn btn-success btn-sm" th:onclick="'window.location.href=\'' + @{/addFeed(feed.idProduktu, __${feed.quantity}__)} + '\''">Add</button>
+                <button class="btn btn-primary btn-sm" th:onclick="'window.location.href=\'' + @{/useFeed(feed.idProduktu, __${feed.quantity}__)} + '\''">Use</button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5"></td>
+            <td class="actions-cell">
+                <a th:href="@{/addNewFeed}" class="btn btn-success">Add New Type of Feed</a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
