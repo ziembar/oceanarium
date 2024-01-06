@@ -3,8 +3,116 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Buy Tickets</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
-    <link th:rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <!-- Replace with the correct links to Bootstrap CSS, font-awesome, and animate.css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"/>
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .ticket-form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .ticket-form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .ticket-form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .ticket-form-header .icon-container {
+            background: #17a2b8;
+            color: white;
+            border-radius: 50%;
+            padding: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label-group input {
+            border-radius: 10px;
+        }
+
+        .form-label-group label {
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            cursor: text;
+            transition: all 0.2s ease;
+            color: #666;
+        }
+
+        .form-label-group input:focus ~ label,
+        .form-label-group input:not(:placeholder-shown) ~ label {
+            font-size: 0.75rem;
+            top: -15px;
+            left: 15px;
+            background: white;
+            padding: 0 5px;
+            color: #17a2b8;
+        }
+
+        .form-label-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+        }
+
+        .btn-ticket {
+            border-radius: 20px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            transition: all 0.2s ease;
+        }
+
+        .btn-ticket:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: .25rem;
+            font-size: 80%;
+            color: #dc3545;
+        }
+
+        .was-validated .form-control:invalid ~ .invalid-feedback {
+            display: block;
+        }
+
+        .was-validated .form-control:invalid {
+            border-color: #dc3545;
+            padding-right: calc(1.5em + .75rem);
+            background-repeat: no-repeat;
+            background-position: right calc(.375em + .1875rem) center;
+            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+        }
+    </style>
 </head>
 <body>
 
@@ -38,47 +146,48 @@
         </div>
     </div>
 </nav>
-
 <div class="container mt-5">
-    <h1 class="mb-4">Available Tickets</h1>
-
-    <table class="table table-bordered">
-        <thead>
-        <tr class="table-header">
-            <th>ID</th>
-            <th>Type</th>
-            <th>Purchase Date</th>
-            <th>Expiration Date</th>
-            <th>Oceanarium ID</th>
-            <th>Scanned</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="ticket : ${listaBiletow}">
-            <td th:text="${ticket.idBiletu}">ID</td>
-            <td th:text="${ticket.idTypuBiletu}">Type</td>
-            <td th:text="${ticket.dataZakupu}">Purchase Date</td>
-            <td th:text="${ticket.dataWaznosci}">Expiration Date</td>
-            <td th:text="${ticket.idOceanarium}">Oceanarium ID</td>
-            <td th:text="${ticket.czySkasowany}">Scanned</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="add-ticket-form">
-        <h2 class="mb-4">Add New Ticket</h2>
-        <form action="/addTicket" method="get">
-            <input type="number" name="idBiletu" placeholder="Ticket ID" required class="form-control mb-2"/>
-            <input type="date" name="dataWaznosci" placeholder="Expiration Date" required class="form-control mb-2"/>
-            <input type="number" name="idTypuBiletu" placeholder="Ticket Type ID" required class="form-control mb-2"/>
-            <button type="submit" class="btn btn-primary">Add Ticket</button>
-        </form>
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="ticket-form-container animated fadeInUp">
+                <div class="ticket-form-header">
+                    <div class="icon-container">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h2>Purchase Your Adventure</h2>
+                    <p>Fill in the details to get started</p>
+                </div>
+                <form action="/addTicket" method="post" class="needs-validation" novalidate>
+                    <div class="form-label-group">
+                        <input type="number" id="idBiletu" name="idBiletu" class="form-control" placeholder="Ticket ID" required>
+                        <label for="idBiletu">Ticket ID</label>
+                        <div class="invalid-feedback">Ticket ID is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="dataWaznosci" name="dataWaznosci" class="form-control" placeholder="Expiration Date" required>
+                        <label for="dataWaznosci">Expiration Date</label>
+                        <div class="invalid-feedback">Expiration Date is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="number" id="idTypuBiletu" name="idTypuBiletu" class="form-control" placeholder="Ticket Type ID" required>
+                        <label for="idTypuBiletu">Ticket Type ID</label>
+                        <div class="invalid-feedback">Ticket Type ID is required.</div>
+                    </div>
+                    <button type="submit" class="btn btn-ticket btn-block">Book Now</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/script.js}"></script>
+<!-- Include scripts for Bootstrap, jQuery, and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Include other scripts if necessary -->
+
+<script>
+    // Custom JavaScript for additional interactivity if necessary
+</script>
 </body>
 </html>
