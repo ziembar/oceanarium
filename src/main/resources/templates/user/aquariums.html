@@ -13,8 +13,8 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
-  <div class="container mr-2 !text-dark" style="font-weight: 500">
-    <a class="navbar-brand dark" href="/">
+  <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
+    <a class="navbar-brand dark mx-5" href="/">
       <div class="flex justify-content-center">
         <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/> <!-- Adjust the height as needed -->
         <span class="font-weight-bold text-dark!">Oceanarium</span>
@@ -89,7 +89,10 @@
       <td th:text="${akwarium.pojemnosc}">pojemnosc</td>
       <td th:text="${akwarium.zasolenie}">zasolenie</td>
       <td th:text="${akwarium.cisnienie}">cisnienie</td>
-      <td th:text="${akwarium.ileRyb}">tak z meter</td>
+      <td>
+        <button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#modal' + ${akwarium.idAkwarium}">
+        <span th:text="${akwarium.ileRyb}"></span> ryb
+      </button></td>
 
     </tr>
     </tbody>
@@ -97,6 +100,58 @@
   </table>
 
 </div>
+
+<!-- Modal dla danych o rybach -->
+<div th:each="akwarium : ${akwaria}" th:id="'modal' + ${akwarium.idAkwarium}" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" style="max-width: 90%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Szczegóły ryb</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table border="1" cellpadding="10">
+          <thead>
+          <tr class="table-header">
+            <th>ID Zwierzęcia</th>
+            <th>Waga</th>
+            <th>Zapotrzebowanie Kaloryczne</th>
+            <th>Kolor</th>
+            <th>Płeć</th>
+            <th>Wiek</th>
+            <th>Nazwa Polska</th>
+            <th>Nazwa Łacińska</th>
+            <th>Rodzaj</th>
+            <th>Rodzina</th>
+            <th>Rząd</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="ryba : ${akwarium.zwierzeta}">
+            <td th:text="${ryba.idZwierzecia}"></td>
+            <td th:text="${ryba.waga}"></td>
+            <td th:text="${ryba.zapotrzebowanieKaloryczne}"></td>
+            <td th:text="${ryba.kolor}"></td>
+            <td th:text="${ryba.plec}"></td>
+            <td th:text="${ryba.wiek}"></td>
+            <td th:text="${ryba.nazwaPolska}"></td>
+            <td th:text="${ryba.nazwaLacinska}"></td>
+            <td th:text="${ryba.rodzaj}"></td>
+            <td th:text="${ryba.rodzina}"></td>
+            <td th:text="${ryba.rzad}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>

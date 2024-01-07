@@ -6,7 +6,7 @@ public class GatunkiDTO {
     private String nazwaLacinska;
     private String rodzaj;
     private String rodzina;
-    private String rząd;
+    private String rzad;
 
     public Long getIdGatunku() {
         return this.idGatunku;
@@ -48,11 +48,11 @@ public class GatunkiDTO {
         this.rodzina = rodzina;
     }
 
-    public String getRząd() {
-        return this.rząd;
+    public String getRzad() {
+        return this.rzad;
     }
 
-    public void setRząd(String rząd) {
-        this.rząd = rząd;
+    public void setRzad(String rzad) {
+        this.rzad = rzad;
     }
 }

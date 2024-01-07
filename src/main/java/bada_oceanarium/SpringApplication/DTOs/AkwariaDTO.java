@@ -1,5 +1,7 @@
 package bada_oceanarium.SpringApplication.DTOs;
 
+import java.util.List;
+
 public class AkwariaDTO {
     private Long idAkwarium;
     private Long pojemnosc;
@@ -8,6 +10,16 @@ public class AkwariaDTO {
     private Double cisnienie;
     private Long idOceanarium;
     private int ileRyb;
+
+    public List<ZwierzetaDTO> getZwierzeta() {
+        return zwierzeta;
+    }
+
+    public void setZwierzeta(List<ZwierzetaDTO> zwierzeta) {
+        this.zwierzeta = zwierzeta;
+    }
+
+    private List<ZwierzetaDTO> zwierzeta;
 
 
     public int getIleRyb() {

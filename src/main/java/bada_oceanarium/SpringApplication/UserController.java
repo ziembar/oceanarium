@@ -43,6 +43,8 @@ public class UserController implements WebMvcConfigurer {
         List<AkwariaDTO> akwaria = akwariaDAO.list();
         model.addAttribute("akwaria", akwaria);
 
+
+
         return "user/aquariums";
     }
 

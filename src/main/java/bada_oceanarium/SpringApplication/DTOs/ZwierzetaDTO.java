@@ -10,6 +10,51 @@ public class ZwierzetaDTO {
     private Long wiek;
     private Long idGatunku;
 
+    private String nazwaPolska;
+    private String nazwaLacinska;
+    private String rodzaj;
+    private String rodzina;
+    private String rzad;
+
+    public String getNazwaPolska() {
+        return nazwaPolska;
+    }
+
+    public void setNazwaPolska(String nazwaPolska) {
+        this.nazwaPolska = nazwaPolska;
+    }
+
+    public String getNazwaLacinska() {
+        return nazwaLacinska;
+    }
+
+    public void setNazwaLacinska(String nazwaLacinska) {
+        this.nazwaLacinska = nazwaLacinska;
+    }
+
+    public String getRodzaj() {
+        return rodzaj;
+    }
+
+    public void setRodzaj(String rodzaj) {
+        this.rodzaj = rodzaj;
+    }
+
+    public String getRodzina() {
+        return rodzina;
+    }
+
+    public void setRodzina(String rodzina) {
+        this.rodzina = rodzina;
+    }
+
+    public String getRzad() {
+        return rzad;
+    }
+
+    public void setRzad(String rzad) {
+        this.rzad = rzad;
+    }
     public Long getIdZwierzecia() {
         return this.idZwierzecia;
     }

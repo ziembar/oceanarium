@@ -10,129 +10,14 @@
     <!-- Bootstrap Datepicker CSS for the datepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css"/>
     <!-- Custom Styles -->
-    <style>
-        body {
-            background: #0056b3; /* Deep blue */
-            animation: breathingBackground 3s ease-in-out infinite alternate;
-        }
+    <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
 
-        .ticket-form-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .ticket-form-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .ticket-form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-        }
-
-        .ticket-form-header .icon-container {
-            background: #17a2b8;
-            color: white;
-            border-radius: 50%;
-            padding: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-label-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label-group input {
-            border-radius: 10px;
-        }
-
-        .form-label-group label {
-            position: absolute;
-            left: 15px;
-            top: 10px;
-            cursor: text;
-            transition: all 0.2s ease;
-            color: #666;
-        }
-
-        .form-label-group input:focus ~ label,
-        .form-label-group input:not(:placeholder-shown) ~ label {
-            font-size: 0.75rem;
-            top: -15px;
-            left: 15px;
-            background: white;
-            padding: 0 5px;
-            color: #17a2b8;
-        }
-
-        .form-label-group input:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
-        }
-
-        .btn-ticket {
-            border-radius: 20px;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            color: white;
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-            transition: all 0.2s ease;
-        }
-
-        .btn-ticket:hover {
-            background-color: #138496;
-            border-color: #117a8b;
-        }
-
-        .invalid-feedback {
-            display: none;
-            width: 100%;
-            margin-top: .25rem;
-            font-size: 80%;
-            color: #dc3545;
-        }
-
-        .was-validated .form-control:invalid ~ .invalid-feedback {
-            display: block;
-        }
-
-        .was-validated .form-control:invalid {
-            border-color: #dc3545;
-            padding-right: calc(1.5em + .75rem);
-            background-repeat: no-repeat;
-            background-position: right calc(.375em + .1875rem) center;
-            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-        }
-        @keyframes breathingBackground {
-            0% {
-                background-color: #0056b3; /* Deep blue */
-            }
-            100% {
-                background-color: #009ffd; /* Light blue */
-            }
-        }
-        .ticket-form-container {
-        }
-
-    </style>
 </head>
-<body>
+<body class="ticket-body">
 
 <nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
-    <div class="container mr-2 !text-dark" style="font-weight: 500">
-        <a class="navbar-brand dark" href="/">
+    <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
+        <a class="navbar-brand dark mx-5" href="/">
             <div class="flex justify-content-center">
                 <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
                 <span class="font-weight-bold text-dark!">Oceanarium</span>
@@ -155,6 +40,10 @@
                     <a class="nav-link font-weight-bold" href="#">Buy Tickets
                         <span class="sr-only">(current)</span>
                     </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link spin" th:href="@{/login}">Login</a></a>
                 </li>
             </ul>
         </div>
