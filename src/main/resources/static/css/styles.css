@@ -116,10 +116,13 @@ a.dark:hover{
 .form-label-group label {
     position: absolute;
     left: 15px;
-    top: 10px;
+    top: -15px; /* Zawsze na górze */
     cursor: text;
     transition: all 0.2s ease;
-    color: #666;
+    color: #17a2b8;
+    background: white; /* Tło, aby uniknąć nakładania się tekstu na input */
+    padding: 0 5px;
+    font-size: 0.75rem; /* Mniejszy rozmiar fontu */
 }
 
 .form-label-group input:focus ~ label,
@@ -135,6 +138,23 @@ a.dark:hover{
 .form-label-group input:focus {
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+.form-label-group select {
+    border-radius: 10px;
+    -webkit-appearance: none; /* Wyłącza domyślny wygląd dla Webkit/Blink */
+    -moz-appearance: none;    /* Wyłącza domyślny wygląd dla Firefox */
+    appearance: none;         /* Przyszłościowe: wyłącza domyślny wygląd dla potencjalnie wszystkich przeglądarek */
+}
+
+.form-label-group select:focus ~ label,
+.form-label-group select:not([value='']):valid ~ label {
+    font-size: 0.75rem;
+    top: -15px;
+    left: 15px;
+    background: white;
+    padding: 0 5px;
+    color: #17a2b8;
 }
 
 .btn-ticket {

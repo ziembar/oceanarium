@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Oceanarium Feed</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
 
@@ -109,14 +110,14 @@
                     <h2>Add New Feed</h2>
                     <p>Fill in the details to add new feed</p>
                 </div>
-                <form action="/addNewFeed" method="post" class="needs-validation" novalidate>
+                <form action="/addNewFeedAction" method="get" class="needs-validation" novalidate>
                     <div class="form-label-group">
                         <input type="text" id="nazwa" name="nazwa" class="form-control" required>
                         <label for="nazwa">Feed Name</label>
                         <div class="invalid-feedback">Feed name is required.</div>
                     </div>
                     <div class="form-label-group">
-                        <input type="text" id="dataWaznosci" name="dataWaznosci" class="form-control" required>
+                        <input type="text" id="dataWaznosci" name="dataWaznosci" class="form-control datepicker" required>
                         <label for="dataWaznosci">Expiration Date</label>
                         <div class="invalid-feedback">Expiration date is required.</div>
                     </div>
@@ -126,13 +127,11 @@
                         <div class="invalid-feedback">Weight is required.</div>
                     </div>
                     <div class="form-label-group">
-                        <input type="number" id="idOceanarium" name="idOceanarium" class="form-control" required>
-                        <label for="idOceanarium">Oceanarium ID</label>
-                        <div class="invalid-feedback">Oceanarium ID is required.</div>
-                    </div>
-                    <div class="form-label-group">
-                        <input type="number" id="idProducenta" name="idProducenta" class="form-control" required>
-                        <label for="idProducenta">Producer ID</label>
+                        <select id="IDProducenta" name="IDProducenta" class="form-control" required>
+                            <option value="">Wybierz producenta...</option>
+                            <!-- Opcje będą dodane tutaj przez JavaScript -->
+                        </select>
+                        <label for="IDProducenta">Producer Name</label>
                         <div class="invalid-feedback">Producer ID is required.</div>
                     </div>
                     <button type="submit" class="btn btn-ticket btn-block">Add Feed</button>
@@ -142,19 +141,40 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 <script>
     $(document).ready(function(){
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true,
-            todayHighlight: true
+            todayHighlight: true,
+            startDate: new Date() // Ustawia dzisiejszą datę jako najwcześniejszą możliwą do wyboru
         });
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/producers')
+            .then(response => response.json())
+            .then(data => {
+                let dropdown = document.getElementById('IDProducenta');
+                data.forEach(producent => {
+                    let option = document.createElement('option');
+                    option.value = producent.idProducenta; // Zakładamy, że producent ma pole 'id'
+                    option.textContent = producent.nazwaProducenta; // i pole 'nazwa'
+                    dropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+
+</script>
 
 </body>
 </html>

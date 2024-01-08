@@ -1,20 +1,22 @@
 package bada_oceanarium.SpringApplication;
 
-import bada_oceanarium.SpringApplication.DAOs.AdresyDAO;
-import bada_oceanarium.SpringApplication.DAOs.AkwariaDAO;
-import bada_oceanarium.SpringApplication.DAOs.KarmyDAO;
+import bada_oceanarium.SpringApplication.DAOs.*;
 import bada_oceanarium.SpringApplication.DTOs.AdresyDTO;
 import bada_oceanarium.SpringApplication.DTOs.AkwariaDTO;
 import bada_oceanarium.SpringApplication.DTOs.KarmyDTO;
+import bada_oceanarium.SpringApplication.DTOs.ProducenciDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Date;
 import java.util.List;
 
 @Configuration
@@ -26,6 +28,8 @@ public class UserController implements WebMvcConfigurer {
     private AkwariaDAO akwariaDAO;
     @Autowired
     private KarmyDAO karmyDAO;
+    @Autowired
+    private ProducenciDAO producenciDAO;
 
 
     @GetMapping("/main_user")
@@ -77,13 +81,16 @@ public class UserController implements WebMvcConfigurer {
     @RequestMapping(value = "/addNewFeedAction",
             produces = "application/json",
             method = {RequestMethod.GET, RequestMethod.PUT})
-    public String addFeed(@RequestParam("idProduktu") int idProduktu,
-                          @RequestParam("quantity") int quantity,
-                          Model model, HttpServletRequest request) {
-        String username = request.getRemoteUser();
-        model.addAttribute("username", username);
-        System.out.println(model.getAttribute(username));
-        System.out.println(idProduktu + quantity);
+    public String addNewFeed(@RequestParam("nazwa") String nazwa,
+                             @RequestParam("dataWaznosci") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataWaznosci,
+                             @RequestParam("waga") Float waga,
+                             @RequestParam("IDProducenta") Long IDProducenta) {
+        karmyDAO.create(nazwa,new java.sql.Date(dataWaznosci.getTime()),waga,IDProducenta);
         return "redirect:/feed"; // Przekierowanie z powrotem do strony karmienia
+    }
+    @GetMapping("/producers")
+    public ResponseEntity<List<ProducenciDTO>> getAllProducenci() {
+        List<ProducenciDTO> producenci = producenciDAO.list();
+        return ResponseEntity.ok(producenci);
     }
 }
