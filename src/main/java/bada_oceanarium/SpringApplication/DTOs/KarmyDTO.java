@@ -7,6 +7,7 @@ public class KarmyDTO {
     private Float waga;
     private Long idOceanarium;
     private Long idProducenta;
+    public int quantity;
 
     public Long getIdProduktu() {
         return this.idProduktu;
