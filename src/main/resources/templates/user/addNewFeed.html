@@ -98,60 +98,63 @@
     </div>
 </nav>
 
-<div class="container-feed">
-    <h1 class="text-center mb-4">Available Feed</h1>
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Expiration Date</th>
-            <th scope="col">Weight (kg)</th>
-            <th scope="col">Oceanarium ID</th>
-            <th scope="col">Producer ID</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="feed : ${karmy}">
-            <td th:text="${feed.idProduktu}">1</td>
-            <td th:text="${feed.nazwa}">Fish Food</td>
-            <td th:text="${feed.dataWaznosci}">2024-01-01</td>
-            <td th:text="${feed.waga}">0.5</td>
-            <td th:text="${feed.idOceanarium}">1</td>
-            <td th:text="${feed.idProducenta}">100</td>
-            <td class="action-cell">
-                <form action="/handleFeedAction" method="get">
-                    <input type="hidden" name="idProduktu" th:value="${feed.idProduktu}">
-                    <input type="number" class="quantity-input" name="quantity" placeholder="Qty" min="0">
-                    <button type="submit" name="action" value="add" class="btn btn-success btn-sm">Add</button>
-                    <button type="submit" name="action" value="use" class="btn btn-primary btn-sm">Use</button>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="ticket-form-container animated fadeInUp">
+                <div class="ticket-form-header">
+                    <div class="icon-container">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h2>Add New Feed</h2>
+                    <p>Fill in the details to add new feed</p>
+                </div>
+                <form action="/addNewFeed" method="post" class="needs-validation" novalidate>
+                    <div class="form-label-group">
+                        <input type="text" id="nazwa" name="nazwa" class="form-control" required>
+                        <label for="nazwa">Feed Name</label>
+                        <div class="invalid-feedback">Feed name is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="dataWaznosci" name="dataWaznosci" class="form-control" required>
+                        <label for="dataWaznosci">Expiration Date</label>
+                        <div class="invalid-feedback">Expiration date is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="number" id="waga" name="waga" class="form-control" required>
+                        <label for="waga">Weight (kg)</label>
+                        <div class="invalid-feedback">Weight is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="number" id="idOceanarium" name="idOceanarium" class="form-control" required>
+                        <label for="idOceanarium">Oceanarium ID</label>
+                        <div class="invalid-feedback">Oceanarium ID is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="number" id="idProducenta" name="idProducenta" class="form-control" required>
+                        <label for="idProducenta">Producer ID</label>
+                        <div class="invalid-feedback">Producer ID is required.</div>
+                    </div>
+                    <button type="submit" class="btn btn-ticket btn-block">Add Feed</button>
                 </form>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="5"></td>
-            <td class="actions-cell">
-                <a th:href="@{/addNewFeed}" class="btn btn-success">Add New Type of Feed</a>
-            </td>
-        </tr>
-        </tfoot>
-    </table>
-</div>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    function redirectToAddFeed(idProduktu) {
-        var quantity = document.getElementById('quantity-' + idProduktu).value;
-        window.location.href = '/addFeed/' + idProduktu + '/' + quantity;
-    }
-</script>
+
 
 </body>
 </html>

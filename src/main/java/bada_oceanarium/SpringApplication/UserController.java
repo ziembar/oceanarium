@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -57,5 +57,33 @@ public class UserController implements WebMvcConfigurer {
         model.addAttribute("karmy", karmy);
 
         return "user/feed";
+    }
+    @RequestMapping(value = "/handleFeedAction",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.PUT})
+    public String addFeed(@RequestParam("idProduktu") Long idProduktu,
+                          @RequestParam("quantity") int quantity,
+                          @RequestParam("action") String action) {
+        System.out.println(idProduktu +action+ quantity);
+
+        if(action.equals("add")){
+            karmyDAO.update_add(quantity,idProduktu);
+        }
+        else if(action.equals("use")){
+            karmyDAO.update_use(quantity,idProduktu);
+        }
+        return "redirect:/feed"; // Przekierowanie z powrotem do strony karmienia
+    }
+    @RequestMapping(value = "/addNewFeedAction",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.PUT})
+    public String addFeed(@RequestParam("idProduktu") int idProduktu,
+                          @RequestParam("quantity") int quantity,
+                          Model model, HttpServletRequest request) {
+        String username = request.getRemoteUser();
+        model.addAttribute("username", username);
+        System.out.println(model.getAttribute(username));
+        System.out.println(idProduktu + quantity);
+        return "redirect:/feed"; // Przekierowanie z powrotem do strony karmienia
     }
 }

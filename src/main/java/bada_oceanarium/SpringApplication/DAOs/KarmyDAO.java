@@ -29,4 +29,14 @@ public class KarmyDAO {
         return ListKarmy;
     }
 
+    public void update_add(int value,Long id){
+        String sql = "UPDATE KARMY SET WAGA = WAGA + ? WHERE ID_PRODUKTU = ?";
+        jdbcTemplate.update(sql, value, id);
+    }
+
+    public void update_use(int value,Long id){
+        String sql = "UPDATE KARMY SET WAGA = WAGA - ? WHERE ID_PRODUKTU = ?";
+        jdbcTemplate.update(sql, value, id);
+    }
+
 }
