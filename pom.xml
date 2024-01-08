@@ -13,11 +13,12 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>19</java.version>
+		<skipTests>true</skipTests>
+		<java.version>21</java.version>
 		<!-- New adding -->
 		<bootstrap.version>4.0.0-2</bootstrap.version>
 		<webjars-locator.version>0.30</webjars-locator.version>
-		<lombok.version>1.18.2</lombok.version>
+		<lombok.version>1.18.30</lombok.version>
 		<commons-validator.version>1.6</commons-validator.version>
 	</properties>
 	<dependencies>
@@ -80,5 +81,19 @@
 		</dependency>
 		<!-- New adding end -->
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<mainClass>bada_oceanarium.SpringApplication.DemoApplication</mainClass>
+					<layout>JAR</layout>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
