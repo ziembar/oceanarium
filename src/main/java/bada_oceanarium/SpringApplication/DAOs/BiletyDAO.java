@@ -27,11 +27,21 @@ public class BiletyDAO {
         List<BiletyDTO> ListBilety = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(BiletyDTO.class));;
         return ListBilety;
     }
-    public void addTicket(long idBilet, java.sql.Date dataWaznosci, long idTypuBiletu) {
-        String sql = "INSERT INTO Bilety (Id_biletu, Czy_skasowany, Data_zakupu, Data_waznosci, Id_oceanarium, Id_typu_biletu) " +
-                "VALUES (?, 'N', CURRENT_DATE, ?, 1, ?)";
+    public int addTicket(java.sql.Date dataWaznosci, long idTypuBiletu) {
 
-        jdbcTemplate.update(sql, idBilet, dataWaznosci, idTypuBiletu);
+        try {
+            long newId = jdbcTemplate.queryForObject("SELECT MAX(ID_BILETU) FROM BILETY", Long.class) + 1;
+
+            System.out.println("new id: " + newId);
+
+            String sql = "INSERT INTO Bilety (Id_biletu, Czy_skasowany, Data_zakupu, Data_waznosci, Id_oceanarium, Id_typu_biletu) " +
+                    "VALUES (?, 'N', CURRENT_DATE, ?, 1, ?)";
+
+            jdbcTemplate.update(sql, newId, dataWaznosci, idTypuBiletu);
+            return (int)newId;
+        }catch (Exception e){
+            return -1;
+        }
     }
 
 }

@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Date;
@@ -36,6 +38,9 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/aquariums").setViewName("user/aquariums");
         registry.addViewController("/addNewFeed").setViewName("user/addNewFeed");
         registry.addViewController("/employees").setViewName("admin/employees");
+        registry.addViewController("/errors/others").setViewName("errors/others");
+        registry.addViewController("/tickets_success").setViewName("tickets_success");
+
     }
 
     @Controller
@@ -55,24 +60,38 @@ public class AppController implements WebMvcConfigurer {
 
         @GetMapping("/tickets")
         public String showTickets(Model model, HttpServletRequest request) {
-            String username = request.getRemoteUser();
-            model.addAttribute("username", username);
 
             List<BiletyDTO> bilety = biletyDAO.list();
             model.addAttribute("listaBiletow", bilety);
 
             return "/tickets";
         }
+
         @RequestMapping(  value = "/addTicket",
                 produces = "application/json",
                 method = {RequestMethod.GET, RequestMethod.PUT})
-        public String addTicket(@RequestParam("idBiletu") Long idBiletu,
+                public String  addTicket(
                                 @RequestParam("dataWaznosci") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataWaznosci,
-                                @RequestParam("idTypuBiletu") Long idTypuBiletu) {
+                                @RequestParam("idTypuBiletu") Long idTypuBiletu,
+                                RedirectAttributes redirectAttributes) {
 
-            biletyDAO.addTicket(idBiletu, new java.sql.Date(dataWaznosci.getTime()), idTypuBiletu);
-            return "redirect:/tickets";
+            int result = biletyDAO.addTicket(new java.sql.Date(dataWaznosci.getTime()), idTypuBiletu);
+
+            if (result!=-1) {
+                redirectAttributes.addAttribute("result", Integer.toString(result));
+                return("redirect:/tickets_success");
+            }
+            else {
+                return ("redirect:/errors/others");
+            }
         }
+
+        @RequestMapping(value = "/tickets_success")
+        public String addTicketSuccess(@RequestParam("result") String id, Model model) {
+            model.addAttribute("id", id);
+            return "tickets_success";
+        }
+
     }
 }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Buy Tickets</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css"/>
     <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
@@ -57,19 +57,23 @@
                     <p>Fill in the details to get started</p>
                 </div>
                 <form action="/addTicket" method="get" class="needs-validation" novalidate>
-                    <div class="form-label-group">
-                        <input type="number" id="idBiletu" name="idBiletu" class="form-control" placeholder="Ticket ID" required>
-                        <label for="idBiletu">Ticket ID</label>
-                        <div class="invalid-feedback">Ticket ID is required.</div>
-                    </div>
+<!--                    <div class="form-label-group">-->
+<!--                        <input type="number" id="idBiletu" name="idBiletu" class="form-control" placeholder="Ticket ID" required>-->
+<!--                        <label for="idBiletu">Ticket ID</label>-->
+<!--                        <div class="invalid-feedback">Ticket ID is required.</div>-->
+<!--                    </div>-->
                     <div class="form-label-group">
                     <input type="text" id="dataWaznosci" name="dataWaznosci" class="form-control datepicker" placeholder="Expiration Date" required>
                     <label for="dataWaznosci">Expiration Date</label>
                     <div class="invalid-feedback">Expiration Date is required.</div>
                 </div>
                     <div class="form-label-group">
-                        <input type="number" id="idTypuBiletu" name="idTypuBiletu" class="form-control" placeholder="Ticket Type ID" required>
-                        <label for="idTypuBiletu">Ticket Type ID</label>
+                        <select type="number" id="idTypuBiletu" name="idTypuBiletu" class="form-control" placeholder="Ticket Type ID" required>
+                                <option value="1">NORMALNY</option>
+                                <option value="2">ULGOWY</option>
+                                <option value="3">RODZINNY</option>
+                            </select>
+                            <label for="idTypuBiletu">Ticket Type ID</label>
                         <div class="invalid-feedback">Ticket Type ID is required.</div>
                     </div>
                     <button type="submit" class="btn btn-ticket btn-block">Book Now</button>
