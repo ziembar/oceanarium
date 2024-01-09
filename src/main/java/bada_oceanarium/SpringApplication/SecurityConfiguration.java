@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/index", "/tickets","/addTicket", "/errors", "/webjars/**", "/img/**", "/css/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/addTicket").permitAll()
-                        .requestMatchers("/main_admin").hasRole("ADMIN")
+                        .requestMatchers("/main_admin","/employees").hasRole("ADMIN")
                         .requestMatchers("/main_user", "aquariums","/feed","/addFeed","/addNewFeed","/producers").hasRole("USER")
                         .anyRequest().permitAll() //było auth ale nie dziala
                 )

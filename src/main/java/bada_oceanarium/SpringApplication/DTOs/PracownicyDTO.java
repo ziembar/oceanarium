@@ -12,6 +12,13 @@ public class PracownicyDTO {
     private String prawoJazdy;
     private Long idOceanarium;
     private Long idAdresu;
+    private AdresyDTO adres;
+    public AdresyDTO getAdres(){
+        return this.adres;
+    }
+    public void setAdres(AdresyDTO x ){
+        this.adres = x;
+    }
 
     public Long getIdPracownika() {
         return this.idPracownika;
