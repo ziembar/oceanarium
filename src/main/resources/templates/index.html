@@ -9,236 +9,245 @@
 
 
 </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
+        <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
+            <a class="navbar-brand dark mx-5" href="/">
+                <div class="flex justify-content-center">
+                    <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
+                    <span class="font-weight-bold text-dark!">Oceanarium</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-white justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active font-weight-bold" href="#">Main
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
 
-<nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
-    <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
-        <a class="navbar-brand dark mx-5" href="/">
-            <div class="flex justify-content-center">
-                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
-                <span class="font-weight-bold text-dark!">Oceanarium</span>
-            </div>
-        </a>
-        <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon text-white justify-content-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
-                </svg>
-            </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link active font-weight-bold" href="#">Main
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link spin" th:href="@{/tickets}">Buy tickets</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link " th:href="@{/login}">Login</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="content-container">
-    <div class="oceanarium-map-tile">
-        <h2>Mapa Oceanarium</h2>
-        <div class="oceanarium-map-container" onclick="enlargeMap()">
-            <img th:src="@{/img/oceanariumMap.png}" alt="Mapa Oceanarium" id="oceanariumMap" class="oceanarium-map-image">
-        </div>
-    </div>
-    <div id="enlargedMapContainer" class="enlarged-map-container" style="display: none;">
-        <img th:src="@{/img/oceanariumMap.png}" alt="Powiększona Mapa Oceanarium">
-    </div>
-
-    <div class="animals-tile">
-        <h2>Nasze Zwierzęta</h2>
-        <div class="animals-container">
-            <div class="animal">
-                <img th:src="@{/img/logo.png}" alt="Foka">
-                <div class="animal-info">
-                    <h3>Foka morska</h3>
-                    <p>Foka to duma naszego oceanarium</p>
-                </div>
-            </div>
-            <div class="animal">
-                <img th:src="@{/img/logo.png}" alt="Foka">
-                <div class="animal-info">
-                    <h3>Foka morska</h3>
-                    <p>Foka to duma naszego oceanarium</p>
-                </div>
-            </div>
-            <div class="animal">
-                <img th:src="@{/img/logo.png}" alt="Foka">
-                <div class="animal-info">
-                    <h3>Foka</h3>
-                    <p>Foka to duma naszego oceanarium</p>
-                </div>
-            </div>
-            <div class="animal">
-                <img th:src="@{/img/logo.png}" alt="Foka">
-                <div class="animal-info">
-                    <h3>Foka morska</h3>
-                    <p>Foka to duma naszego oceanarium</p>
-                </div>
-            </div>
-            <div class="animal">
-                <img th:src="@{/img/logo.png}" alt="Foka">
-                <div class="animal-info">
-                    <h3>Fo</h3>
-                    <p>Foka to duma naszego oceanarium</p>
-                </div>
-            </div>
-            <div class="animal">
-                <img th:src="@{/img/logo.png}" alt="Foka">
-                <div class="animal-info">
-                    <h3>Foka morska</h3>
-                    <p>Foka to duma naszego oceanarium</p>
-                </div>
+                    <li class="nav-item">
+                        <a class="nav-link spin" th:href="@{/tickets}">Buy tickets</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " th:href="@{/login}">Login</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+    <div class="content-container">
+        <div class="oceanarium-map-tile">
+            <h2>Mapa Oceanarium</h2>
+            <div class="oceanarium-map-container" onclick="enlargeMap()">
+                <img th:src="@{/img/oceanariumMap.png}" alt="Mapa Oceanarium" id="oceanariumMap" class="oceanarium-map-image">
+            </div>
+        </div>
+        <div id="enlargedMapContainer" class="enlarged-map-container" style="display: none;">
+            <img th:src="@{/img/oceanariumMap.png}" alt="Powiększona Mapa Oceanarium">
+        </div>
+
+        <div class="animals-tile">
+            <h2>Nasze Zwierzęta</h2>
+            <div class="animals-container">
+                <div class="animal">
+                    <img th:src="@{/img/logo.png}" alt="Foka">
+                    <div class="animal-info">
+                        <h3>Foka morska</h3>
+                        <p>Foka to duma naszego oceanarium</p>
+                    </div>
+                </div>
+                <div class="animal">
+                    <img th:src="@{/img/logo.png}" alt="Foka">
+                    <div class="animal-info">
+                        <h3>Foka morska</h3>
+                        <p>Foka to duma naszego oceanarium</p>
+                    </div>
+                </div>
+                <div class="animal">
+                    <img th:src="@{/img/logo.png}" alt="Foka">
+                    <div class="animal-info">
+                        <h3>Foka</h3>
+                        <p>Foka to duma naszego oceanarium</p>
+                    </div>
+                </div>
+                <div class="animal">
+                    <img th:src="@{/img/logo.png}" alt="Foka">
+                    <div class="animal-info">
+                        <h3>Foka morska</h3>
+                        <p>Foka to duma naszego oceanarium</p>
+                    </div>
+                </div>
+                <div class="animal">
+                    <img th:src="@{/img/logo.png}" alt="Foka">
+                    <div class="animal-info">
+                        <h3>Fo</h3>
+                        <p>Foka to duma naszego oceanarium</p>
+                    </div>
+                </div>
+                <div class="animal">
+                    <img th:src="@{/img/logo.png}" alt="Foka">
+                    <div class="animal-info">
+                        <h3>Foka morska</h3>
+                        <p>Foka to duma naszego oceanarium</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<style>
-    .content-container {
-        display: flex;
-        flex-wrap: wrap; /* Zapewnia zawijanie kafelków */
-        justify-content: space-around; /* Rozkłada kafelki równomiernie */
-        gap: 20px; /* Odstęp między kafelkami */
-        margin-top: 20px; /* Dodatkowy odstęp od górnej części strony */
-    }
-
-    .oceanarium-map-tile, .animals-tile {
-        flex: 1 1 calc(50% - 20px); /* Elastyczna szerokość z odjęciem odstępu */
-        max-width: 400px; /* Maksymalna szerokość kafelka */
-        /* Dalsze style dla kafelków... */
-    }
-
-    /* Styl dla kafelków na mniejszych ekranach */
-    @media (max-width: 600px) {
-        .oceanarium-map-tile, .animals-tile {
-            flex-basis: 100%; /* Każdy kafelek na pełną szerokość na małych ekranach */
+    <style>
+        body {
+            background-image: url('img/akwarium.png'); /* Ścieżka do obrazu tła */
+            background-size: cover; /* Zapewnia pokrycie całego tła */
+            background-position: center; /* Wyśrodkowanie obrazu tła */
+            background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
+            position: relative; /* Pozycjonowanie względem elementu */
         }
-    }
-    .oceanarium-map-section {
-        text-align: center;
-        margin: 50px 0;
-    }
-    .oceanarium-map-container {
-        max-width: 800px; /* Dostosuj do swoich potrzeb */
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ddd; /* Subtelna ramka */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Lekkie cieniowanie dla głębi */
-        border-radius: 8px; /* Zaokrąglone rogi */
-    }
-    .oceanarium-map-image {
-        width: 100%;
-        height: auto;
-        border-radius: 8px; /* Zaokrąglone rogi obrazu */
-    }
-    .enlarged-map {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 40%;
-        max-height: 90%;
-        z-index: 1000;
-        border: 1px solid #ddd;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        overflow: auto;
-    }
-    .enlarged-map-container {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 40%;
-        max-height: 90%;
-        width: auto; /* Auto width for initial scaling */
-        height: auto; /* Auto height for initial scaling */
-        z-index: 1000;
-        border: 1px solid #ddd;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        overflow: hidden; /* Changed to hidden to avoid scrollbars */
-        display: flex; /* Flex to help with centering the image */
-        align-items: center; /* Center image vertically */
-        justify-content: center; /* Center image horizontally */
-    }
+        .content-container {
+            display: flex;
+            flex-wrap: wrap; /* Zapewnia zawijanie kafelków */
+            justify-content: space-around; /* Rozkłada kafelki równomiernie */
+            gap: 20px; /* Odstęp między kafelkami */
+            margin-top: 20px; /* Dodatkowy odstęp od górnej części strony */
+        }
 
-    .enlarged-map-container img {
-        max-width: 100%; /* Ensure the image is not wider than the container */
-        max-height: 90%; /* Ensure the image is not taller than the container */
-        width: auto; /* Allow the image to scale responsively */
-        height: auto; /* Allow the image to scale responsively */
-    }
+        .oceanarium-map-tile, .animals-tile {
+            flex: 1 1 calc(50% - 20px); /* Elastyczna szerokość z odjęciem odstępu */
+            max-width: 400px; /* Maksymalna szerokość kafelka */
+            /* Dalsze style dla kafelków... */
+        }
 
-    .oceanarium-map-tile {
-        position: absolute;
-        top: 100px; /* Dostosuj odległość od górnej krawędzi */
-        right: 50px; /* Dostosuj odległość od prawej krawędzi */
-        width: 400px; /* Dostosuj szerokość kafelka */
-        height: auto;
-        z-index: 10;
-        background-color: #fff; /* Kolor tła kafelka */
-        border: 1px solid #ddd; /* Ramka kafelka */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Cień kafelka */
-        border-radius: 8px; /* Zaokrąglone rogi */
-        overflow: hidden; /* Zapobiega wystawaniu zawartości poza kafelek */
-    }
+        /* Styl dla kafelków na mniejszych ekranach */
+        @media (max-width: 600px) {
+            .oceanarium-map-tile, .animals-tile {
+                flex-basis: 100%; /* Każdy kafelek na pełną szerokość na małych ekranach */
+            }
+        }
+        .oceanarium-map-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+        .oceanarium-map-container {
+            max-width: 800px; /* Dostosuj do swoich potrzeb */
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd; /* Subtelna ramka */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Lekkie cieniowanie dla głębi */
+            border-radius: 8px; /* Zaokrąglone rogi */
+        }
+        .oceanarium-map-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; /* Zaokrąglone rogi obrazu */
+        }
+        .enlarged-map {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 40%;
+            max-height: 90%;
+            z-index: 1000;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: auto;
+        }
+        .enlarged-map-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 40%;
+            max-height: 90%;
+            width: auto; /* Auto width for initial scaling */
+            height: auto; /* Auto height for initial scaling */
+            z-index: 1000;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden; /* Changed to hidden to avoid scrollbars */
+            display: flex; /* Flex to help with centering the image */
+            align-items: center; /* Center image vertically */
+            justify-content: center; /* Center image horizontally */
+        }
 
-    .oceanarium-map-tile h2 {
-        font-size: 18px; /* Dostosuj rozmiar czcionki tytułu */
-        text-align: center;
-        margin: 10px 0; /* Dostosuj marginesy tytułu */
-    }
+        .enlarged-map-container img {
+            max-width: 100%; /* Ensure the image is not wider than the container */
+            max-height: 90%; /* Ensure the image is not taller than the container */
+            width: auto; /* Allow the image to scale responsively */
+            height: auto; /* Allow the image to scale responsively */
+        }
 
-    .oceanarium-map-tile img {
-        width: 100%;
-        height: auto;
-        cursor: pointer; /* Kursor zmienia się na wskaźnik */
-    }
-    .animals-tile {
-        max-width: 400px; /* Dostosuj szerokość do potrzeb */
-        margin: 20px auto;
-        padding: 10px;
-        background-color: #f9f9f9; /* Kolor tła */
-        border: 1px solid #ddd; /* Ramka */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Cień */
-        border-radius: 8px; /* Zaokrąglone rogi */
-        overflow: hidden; /* Ukryj przewijanie */
-    }
+        .oceanarium-map-tile {
+            background-color: #fff; /* Kolor tła kafelka */
+            border: 1px solid #ddd; /* Ramka kafelka */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Cień kafelka */
+            border-radius: 8px; /* Zaokrąglone rogi */
+            overflow: hidden; /* Zapobiega wystawaniu zawartości poza kafelek */
+        }
 
-    .animals-container {
-        max-height: 400px; /* Dostosuj maksymalną wysokość */
-        overflow-y: auto; /* Włącz przewijanie pionowe */
-    }
+        .oceanarium-map-tile h2 {
+            font-size: 18px; /* Dostosuj rozmiar czcionki tytułu */
+            text-align: center;
+            margin: 10px 0; /* Dostosuj marginesy tytułu */
+        }
 
-    .animal {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px; /* Odstęp między wpisami */
-    }
-    .animal img {
-        width: 100px; /* Szerokość zdjęcia */
-        height: 100px; /* Wysokość zdjęcia */
-        border-radius: 50%; /* Okrągłe zdjęcia */
-        margin-right: 10px; /* Odstęp od tekstu */
-    }
-    .animal-info {
-        flex-grow: 1;
-    }
+        .oceanarium-map-tile img {
+            width: 100%;
+            height: auto;
+            cursor: pointer; /* Kursor zmienia się na wskaźnik */
+        }
+        .animals-tile {
+            background-color: #fff; /* Kolor tła kafelka */
+            border: 1px solid #ddd; /* Ramka kafelka */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Cień kafelka */
+            border-radius: 8px; /* Zaokrąglone rogi */
+            overflow: hidden; /* Zapobiega wystawaniu zawartości poza kafelek */
+        }
+        .animals-tile h2 {
+            font-size: 18px; /* Dostosuj rozmiar czcionki tytułu */
+            text-align: center;
+            margin: 10px 0; /* Dostosuj marginesy tytułu */
+        }
 
-</style>
+        .animals-container {
+            max-width: 800px; /* Dostosuj do swoich potrzeb */
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd; /* Subtelna ramka */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Lekkie cieniowanie dla głębi */
+            border-radius: 8px; /* Zaokrąglone rogi */
+            max-height: 400px; /* Dostosuj maksymalną wysokość */
+            overflow-y: auto; /* Włącz przewijanie pionowe */
+        }
 
+        .animal {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Odstęp między wpisami */
+        }
+        .animal img {
+            width: 100px; /* Szerokość zdjęcia */
+            height: 100px; /* Wysokość zdjęcia */
+            border-radius: 50%; /* Okrągłe zdjęcia */
+            margin-right: 10px; /* Odstęp od tekstu */
+        }
+        .animal-info {
+            flex-grow: 1;
+        }
 
+    </style>
+
+</body>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
