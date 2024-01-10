@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Welcome Page</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
+
+
+</head>
+<style>
+    .error-container {
+        color: #333;
+        text-align: center;
+        padding: 0 15px;
+    }
+
+    .btn-home {
+        margin-top: 20px;
+    }
+</style>
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
+    <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
+        <a class="navbar-brand dark mx-5" href="/">
+            <div class="flex justify-content-center">
+                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
+                <span class="font-weight-bold text-dark!">Oceanarium</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-white justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}">Main</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/tickets}">Buy tickets</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link " th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container error-container">
+    <div class="d-inline-block" style=" width: 35%">
+        <b><span class="position-absolute font-weight-bold text-white"
+              style="font-size: xx-large;
+               text-decoration: #28a745; top: 16%; left: 47%; font-family: 'Comic Sans MS'"
+              th:text="${statusCode}"></span></b>
+        <img style="border-radius: 10px; width: 100%" th:src="@{/img/mt.png}" alt="Error image"/>
+
+    </div>
+    <h1 class="text-white text-lg-center">Whoops! We hit a snag.</h1>
+    <p class="lead text-white"><th:block th:text="${message}"></th:block></p>
+    <a href="/index" class="btn btn-primary btn-home">Take Me Home</a>
+    <!-- Optional: Add more navigation options or helpful links here -->
+</div>
+
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</body>
+</html>
+

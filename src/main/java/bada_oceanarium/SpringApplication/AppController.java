@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Configuration
 public class AppController implements WebMvcConfigurer {
@@ -39,7 +44,7 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/addNewFeed").setViewName("user/addNewFeed");
         registry.addViewController("/employees").setViewName("admin/employees");
         registry.addViewController("/addNewUser").setViewName("admin/addNewUser");
-        registry.addViewController("/errors/others").setViewName("errors/others");
+        registry.addViewController("/error").setViewName("error");
         registry.addViewController("/tickets_success").setViewName("tickets_success");
 
 
@@ -48,11 +53,12 @@ public class AppController implements WebMvcConfigurer {
     @Controller
     public class DashboardController {
 
-        @GetMapping("/main")
-        public String defaultAfterLogin(HttpServletRequest request) {
-            if (request.isUserInRole("ADMIN")) {
+        @RequestMapping("/main")
+        public String defaultAfterLogin() {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication.getAuthorities().toArray()[0].toString().equals("ADMIN")) {
                 return "redirect:/main_admin";
-            } else if (request.isUserInRole("USER")) {
+            } else if (authentication.getAuthorities().toArray()[0].toString().equals("USER")) {
                 return "redirect:/main_user";
             } else {
                 return "redirect:/index";
@@ -62,7 +68,6 @@ public class AppController implements WebMvcConfigurer {
 
         @GetMapping("/tickets")
         public String showTickets(Model model, HttpServletRequest request) {
-
             List<BiletyDTO> bilety = biletyDAO.list();
             model.addAttribute("listaBiletow", bilety);
 
@@ -84,7 +89,7 @@ public class AppController implements WebMvcConfigurer {
                 return("redirect:/tickets_success");
             }
             else {
-                return ("redirect:/errors/others");
+                return ("redirect:/error");
             }
         }
 

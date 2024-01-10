@@ -65,7 +65,7 @@ public class AdminController implements WebMvcConfigurer {
     @RequestMapping(value = "/addNewUserAction",
             produces = "application/json",
             method = {RequestMethod.GET, RequestMethod.PUT})
-    public String addNewFeed(@RequestParam("imie") String imie,
+    public String addNewUser(@RequestParam("imie") String imie,
                              @RequestParam("nazwisko") String nazwisko,
                              @RequestParam("plec") String plec,
                              @RequestParam("pesel") String pesel,
@@ -79,6 +79,13 @@ public class AdminController implements WebMvcConfigurer {
         Long idAdresu = adresyDAO.createForNewUser(miasto,ulica,numerDomu);
         pracownicyDAO.create(imie, nazwisko, plec, pesel, nrTelefonu, email,
                 new java.sql.Date(dataUrodzenia.getTime()), prawoJazdy, idAdresu);
+//        TODO:
+//        -sprawdzac czy jest juz taki sam username w bazie, jesli tak to dodac numerek
+//        -zmienic pole username w bazie (bo jest autocalculating teraz)
+//        -generowac haslo? plus wpisywac hash do bazy (BCryptPasswordEncoder().encode("test")
+//        -nie ma juz roli, sa authorities
+//        -sposob pobierania informacji o userze, UserDetailsService? bo jedyne co teraz mamy to username
+
 
         return "redirect:/employees";
     }
