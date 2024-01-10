@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+//TODO: moze usuwanie userow jak bedzie czas
 @Configuration
 @Controller
 public class AdminController implements WebMvcConfigurer {
@@ -56,7 +56,7 @@ public class AdminController implements WebMvcConfigurer {
         List<AdresyDTO> adresyPracownikow = new ArrayList<>();
         for(PracownicyDTO emply : pracusie){
             int idAdresu = Math.toIntExact(emply.getIdAdresu());
-            emply.setAdres(adresy.get(idAdresu));
+            emply.setAdres(adresy.get(idAdresu - 1));
         }
         model.addAttribute("adresyPracownikow", adresyPracownikow);
         return "admin/employees";
