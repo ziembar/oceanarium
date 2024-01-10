@@ -104,12 +104,26 @@
         </div>
     </div>
     <style>
-        body {
+        body, body::after {
+            position: relative;
+            min-height: 100vh;
+            z-index: 0;
+            overflow-x: hidden;
+        }
+
+        body::after {
+            content: "";
             background-image: url('img/akwarium.png'); /* Ścieżka do obrazu tła */
             background-size: cover; /* Zapewnia pokrycie całego tła */
             background-position: center; /* Wyśrodkowanie obrazu tła */
             background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
-            position: relative; /* Pozycjonowanie względem elementu */
+            opacity: 0.35; /* Ustaw przejrzystość tła */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute; /* Absolutne pozycjonowanie względem body */
+            z-index: -1; /* Upewnia się, że tło znajduje się pod innymi elementami */
         }
         .content-container {
             display: flex;
