@@ -41,4 +41,15 @@ public class AdresyDAO {
 
     public void delete(int id) {
     }
+
+    public Long createForNewUser(String miasto, String ulica, String numerDomu) {
+        String sqlGetId =  "SELECT MAX(ID_ADRESU) AS NajwyzszeIDAdresu FROM ADRESY";
+        Long adressId = jdbcTemplate.queryForObject(sqlGetId, Long.class);
+        adressId = adressId +1;
+
+        String sql = "INSERT INTO Adresy (Id_adresu, Panstwo, Wojewodztwo, Powiat, Gmina, Miasto, Ulica, Nr_domu, Nr_mieszkania, Kod_pocztowy)\n" +
+                "VALUES (?, 'Polska', 'Mazowieckie', 'Warszawa', 'Warszawa', ?, ?, ?, '3', '00-001');";
+        jdbcTemplate.update(sql,adressId, miasto,ulica,numerDomu);
+        return adressId;
+    }
 }

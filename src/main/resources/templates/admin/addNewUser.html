@@ -52,7 +52,6 @@
 </head>
 <body>
 
-<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
     <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
         <a class="navbar-brand dark mx-5" href="/">
@@ -72,17 +71,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link"  th:href="@{/main_user}">Main</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/aquariums}">Aquariums</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active  font-weight-bold" href="#">Feed
+                    <a class="nav-link font-weight-bold"  href="#">Main
                         <span class="sr-only" >(current)</span>
                     </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employees}">Employees</a>
                 </li>
 
                 <li class="nav-item">
@@ -109,34 +104,75 @@
                     <div class="icon-container">
                         <i class="fas fa-seedling"></i>
                     </div>
-                    <h2>Add New Feed</h2>
-                    <p>Fill in the details to add new feed</p>
+                    <h2>Add New Employee</h2>
+                    <p>Fill in the details to add a new employee</p>
                 </div>
-                <form action="/addNewFeedAction" method="get" class="needs-validation" novalidate>
+                <form action="/addNewUserAction" method="get" class="needs-validation" novalidate>
                     <div class="form-label-group">
-                        <input type="text" id="nazwa" name="nazwa" class="form-control" required>
-                        <label for="nazwa">Feed Name</label>
-                        <div class="invalid-feedback">Feed name is required.</div>
+                        <input type="text" id="imie" name="imie" class="form-control" required>
+                        <label for="imie">First Name</label>
+                        <div class="invalid-feedback">First name is required.</div>
                     </div>
                     <div class="form-label-group">
-                        <input type="text" id="dataWaznosci" name="dataWaznosci" class="form-control datepicker" required>
-                        <label for="dataWaznosci">Expiration Date</label>
-                        <div class="invalid-feedback">Expiration date is required.</div>
+                        <input type="text" id="nazwisko" name="nazwisko" class="form-control" required>
+                        <label for="nazwisko">Last Name</label>
+                        <div class="invalid-feedback">Last name is required.</div>
                     </div>
                     <div class="form-label-group">
-                        <input type="number" id="waga" name="waga" class="form-control" required>
-                        <label for="waga">Weight (kg)</label>
-                        <div class="invalid-feedback">Weight is required.</div>
-                    </div>
-                    <div class="form-label-group">
-                        <select id="IDProducenta" name="IDProducenta" class="form-control" required>
-                            <option value="">Wybierz producenta...</option>
-                            <!-- Opcje będą dodane tutaj przez JavaScript -->
+                        <select id="plec" name="plec" class="form-control" required>
+                            <option value="">Select Gender...</option>
+                            <option value="M">Male</option>
+                            <option value="K">Female</option>
                         </select>
-                        <label for="IDProducenta">Producer Name</label>
-                        <div class="invalid-feedback">Producer ID is required.</div>
+                        <label for="plec">Gender</label>
+                        <div class="invalid-feedback">Gender is required.</div>
                     </div>
-                    <button type="submit" class="btn btn-ticket btn-block">Add Feed</button>
+                    <div class="form-label-group">
+                        <input type="text" id="pesel" name="pesel" class="form-control" required>
+                        <label for="pesel">PESEL</label>
+                        <div class="invalid-feedback">PESEL is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="nrTelefonu" name="nrTelefonu" class="form-control" required>
+                        <label for="nrTelefonu">Phone Number</label>
+                        <div class="invalid-feedback">Phone number is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="email">Email</label>
+                        <div class="invalid-feedback">Email is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="date" id="dataUrodzenia" name="dataUrodzenia" class="form-control" required>
+                        <label for="dataUrodzenia">Date of Birth</label>
+                        <div class="invalid-feedback">Date of birth is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <label for="prawoJazdy">Driver's License</label>
+                        <select id="prawoJazdy" name="prawoJazdy" class="form-control" required>
+                            <option value="">Select...</option>
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                        <div class="invalid-feedback">Please select an option.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="miasto" name="miasto" class="form-control" required>
+                        <label for="miasto">City</label>
+                        <div class="invalid-feedback">City is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="ulica" name="ulica" class="form-control" required>
+                        <label for="ulica">Street</label>
+                        <div class="invalid-feedback">Street is required.</div>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" id="numerDomu" name="numerDomu" class="form-control" required>
+                        <label for="numerDomu">House Number</label>
+                        <div class="invalid-feedback">House number is required.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-ticket btn-block">Add Employee</button>
                 </form>
             </div>
         </div>
