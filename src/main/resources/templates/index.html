@@ -54,6 +54,17 @@
         <div id="enlargedMapContainer" class="enlarged-map-container" style="display: none;">
             <img th:src="@{/img/oceanariumMap.png}" alt="Powiększona Mapa Oceanarium">
         </div>
+        <div class="infoBox-tile">
+            <h2>Informacje</h2>
+            <div class="info-container">
+                <!-- Added Basic Information Content -->
+                <p><strong>Godziny Otwarcia:</strong> 9:00 - 20:00</p>
+                <p><strong>Adres:</strong> Ulica Oceanarium, 00-000 Miejsce</p>
+                <p><strong>Kontakt:</strong> kontakt@oceanarium.com</p>
+                <p><strong>Ceny Biletów:</strong> Dorośli - 50zł, Dzieci - 30zł</p>
+                <!-- End of Basic Information Content -->
+            </div>
+        </div>
 
         <div class="animals-tile">
             <h2>Nasze Zwierzęta</h2>
@@ -258,6 +269,34 @@
         .animal-info {
             flex-grow: 1;
         }
+        .infoBox-tile {
+            background-color: #fff; /* Kolor tła kafelka */
+            border: 1px solid #ddd; /* Ramka kafelka */
+            height: 300px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Cień kafelka */
+            border-radius: 8px; /* Zaokrąglone rogi */
+            overflow: hidden; /* Zapobiega wystawaniu zawartości poza kafelek */
+            flex: 1 1 calc(50% - 20px); /* Elastyczna szerokość z odjęciem odstępu */
+            max-width: 400px; /* Maksymalna szerokość kafelka */
+        }
+
+        .infoBox-tile h2 {
+            font-size: 18px; /* Dostosuj rozmiar czcionki tytułu */
+            text-align: center;
+            margin: 10px 0; /* Dostosuj marginesy tytułu */
+        }
+
+        .info-container {
+            padding: 20px; /* Wewnętrzny odstęp od krawędzi kafelka */
+            text-align: left; /* Wyrównanie tekstu do lewej */
+            font-size: 14px; /* Rozmiar czcionki tekstu */
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Lekkie cieniowanie dla głębi */
+            border-radius: 8px; /* Zaokrąglone rogi */
+            max-height: 400px; /* Dostosuj maksymalną wysokość */
+            overflow-y: auto; /* Włącz przewijanie pionowe */
+        }
+
 
     </style>
 
@@ -272,6 +311,11 @@
         enlargedMapContainer.style.display = isDisplayed ? "none" : "block";
     }
 
+    /*
+    * godziny otwarcia/ kontakt
+    * powiększanie info o zwierzakach
+    *
+    * */
 </script>
 </body>
 </html>

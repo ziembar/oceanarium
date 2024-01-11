@@ -22,7 +22,7 @@ public class AdresyDAO {
 
 
     public List<AdresyDTO> list(){
-        String sql = "SELECT * FROM ADRESY";
+        String sql = "SELECT * FROM ADRESY ORDER BY ID_ADRESU";
         List<AdresyDTO> ListAdresy = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(AdresyDTO.class));;
         return ListAdresy;
     }

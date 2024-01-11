@@ -48,17 +48,15 @@ public class AdminController implements WebMvcConfigurer {
         model.addAttribute("username", username);
 
         List<PracownicyDTO> pracusie = pracownicyDAO.list();
-        model.addAttribute("pracownicy", pracusie);
+
 
         List<AdresyDTO> adresy = adresyDAO.list();
-        model.addAttribute("adresy", adresy);
 
-        List<AdresyDTO> adresyPracownikow = new ArrayList<>();
         for(PracownicyDTO emply : pracusie){
             int idAdresu = Math.toIntExact(emply.getIdAdresu());
             emply.setAdres(adresy.get(idAdresu - 1));
         }
-        model.addAttribute("adresyPracownikow", adresyPracownikow);
+        model.addAttribute("pracownicy", pracusie);
         return "admin/employees";
     }
 

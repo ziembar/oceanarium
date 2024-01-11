@@ -25,7 +25,7 @@ public class PracownicyDAO {
 
 
     public List<PracownicyDTO> list() {
-        String sql = "SELECT * FROM PRACOWNICY";
+        String sql = "SELECT * FROM PRACOWNICY ORDER BY ID_PRACOWNIKA";
         List<PracownicyDTO> ListaPracownikow = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(PracownicyDTO.class));
         return ListaPracownikow;
     }
