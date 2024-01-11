@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 //TODO: moze usuwanie userow jak bedzie czas
 @Configuration
 @Controller
@@ -44,6 +47,18 @@ public class AdminController implements WebMvcConfigurer {
     }
     @GetMapping("/employees")
     public String showEmployees(Model model, HttpServletRequest request) {
+
+        String[] res = (String[])model.getAttribute("result");
+        if (res != null){
+            System.out.println("hello");
+            System.out.println(res[0]);
+            model.addAttribute("newUserId", res[0]);
+            model.addAttribute("newUserUsername", res[1]);
+            model.addAttribute("newUserPassword", res[2]);
+
+        }
+
+
         String username = request.getRemoteUser();
         model.addAttribute("username", username);
 
@@ -73,17 +88,20 @@ public class AdminController implements WebMvcConfigurer {
                              @RequestParam("prawoJazdy") String prawoJazdy,
                              @RequestParam("miasto") String miasto,
                              @RequestParam("ulica") String ulica,
-                             @RequestParam("numerDomu") String numerDomu) {
+                             @RequestParam("numerDomu") String numerDomu,
+                             @RequestParam("rola") String rola,
+                             RedirectAttributes redirectAttributes) {
         Long idAdresu = adresyDAO.createForNewUser(miasto,ulica,numerDomu);
-        pracownicyDAO.create(imie, nazwisko, plec, pesel, nrTelefonu, email,
-                new java.sql.Date(dataUrodzenia.getTime()), prawoJazdy, idAdresu);
+        String[] resultArr = pracownicyDAO.create(imie, nazwisko, plec, pesel, nrTelefonu, email,
+                new java.sql.Date(dataUrodzenia.getTime()), prawoJazdy, idAdresu, rola);
 //        TODO:
-//        -sprawdzac czy jest juz taki sam username w bazie, jesli tak to dodac numerek
-//        -zmienic pole username w bazie (bo jest autocalculating teraz)
-//        -generowac haslo? plus wpisywac hash do bazy (BCryptPasswordEncoder().encode("test")
+//        DONE -sprawdzac czy jest juz taki sam username w bazie, jesli tak to dodac numerek
+//        DONE -zmienic pole username w bazie (bo jest autocalculating teraz)
+//        DONE-generowac haslo? plus wpisywac hash do bazy (BCryptPasswordEncoder().encode("test")
 //        -nie ma juz roli, sa authorities
 //        -sposob pobierania informacji o userze, UserDetailsService? bo jedyne co teraz mamy to username
 
+        redirectAttributes.addFlashAttribute("result", resultArr);
 
         return "redirect:/employees";
     }

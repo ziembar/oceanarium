@@ -142,6 +142,32 @@
     </table>
 </div>
 
+<div class="modal" id="newUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">New User Information</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Replace the information below with actual user information -->
+                <p th:text="${newUserId} + ' has been added as a new user.'"></p>
+                <p th:text="'Email: ' + ${newUserUsername}"></p>
+                <!-- Add more user information as needed -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -149,6 +175,15 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script th:src="@{/js/script.js}"></script>
 
+
+<script th:inline="javascript">
+    $(document).ready(function(){
+        var newUserId = [[${newUserId}]];
+        if (newUserId !== null) {
+            $('#newUserModal').modal('show');
+        }
+    });
+</script>
 
 </body>
 </html>
