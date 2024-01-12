@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/index", "/tickets","/addTicket", "/error", "/webjars/**", "/img/**", "/css/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/addTicket").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/deleteUsers", "addNewUserAction").hasAuthority("ADMIN")
                         .requestMatchers("/main_admin","/employees","/addNewUser").hasAuthority("ADMIN")
                         .requestMatchers("/main_user", "aquariums","/feed","/addFeed","/addNewFeed","/producers").hasAuthority("USER")
                         .anyRequest().permitAll() //było auth ale nie dziala
@@ -65,21 +66,4 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//        UserDetails admin =
-//                User.withDefaultPasswordEncoder()
-//                        .username("admin")
-//                        .password("admin")
-//                        .roles("ADMIN")
-//                        .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 }

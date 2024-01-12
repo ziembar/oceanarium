@@ -20,7 +20,6 @@ public class CustomErrorController implements ErrorController {
             statusCode = Integer.valueOf(status.toString());
             model.addAttribute("statusCode", statusCode);
         }
-        System.out.println();
             switch (statusCode) {
                 case 403: {
                     model.addAttribute("message", "Forbidden page");
@@ -31,7 +30,7 @@ public class CustomErrorController implements ErrorController {
                     break;
                 }
                 case 500: {
-                    model.addAttribute("message", "Forbidden page");
+                    model.addAttribute("message", "Internal server error");
                     break;
                 }
                 case 504: {

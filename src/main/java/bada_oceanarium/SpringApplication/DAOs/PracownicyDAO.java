@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.security.SecureRandom;
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -84,7 +85,7 @@ public class PracownicyDAO {
         return potencialUsername.concat(String.valueOf(maxNumber + 1));
     }
 
-    public static String generatePassword() {
+    private static String generatePassword() {
         String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?";
         SecureRandom random = new SecureRandom();
         StringBuilder randomString = new StringBuilder();
@@ -96,6 +97,9 @@ public class PracownicyDAO {
 
         return randomString.toString();
     }
-
-
+    public void deleteMany(String[] ids) {
+        String idsPlaceholders = String.join(",", Collections.nCopies(ids.length, "?"));
+        String sql = "DELETE FROM PRACOWNICY WHERE ID_PRACOWNIKA IN (" + idsPlaceholders + ")";
+        jdbcTemplate.update(sql, (Object[]) ids);
+    }
 }

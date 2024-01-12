@@ -13,10 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -50,8 +47,6 @@ public class AdminController implements WebMvcConfigurer {
 
         String[] res = (String[])model.getAttribute("result");
         if (res != null){
-            System.out.println("hello");
-            System.out.println(res[0]);
             model.addAttribute("newUserId", res[0]);
             model.addAttribute("newUserUsername", res[1]);
             model.addAttribute("newUserPassword", res[2]);
@@ -94,15 +89,15 @@ public class AdminController implements WebMvcConfigurer {
         Long idAdresu = adresyDAO.createForNewUser(miasto,ulica,numerDomu);
         String[] resultArr = pracownicyDAO.create(imie, nazwisko, plec, pesel, nrTelefonu, email,
                 new java.sql.Date(dataUrodzenia.getTime()), prawoJazdy, idAdresu, rola);
-//        TODO:
-//        DONE -sprawdzac czy jest juz taki sam username w bazie, jesli tak to dodac numerek
-//        DONE -zmienic pole username w bazie (bo jest autocalculating teraz)
-//        DONE-generowac haslo? plus wpisywac hash do bazy (BCryptPasswordEncoder().encode("test")
-//        -nie ma juz roli, sa authorities
-//        -sposob pobierania informacji o userze, UserDetailsService? bo jedyne co teraz mamy to username
 
         redirectAttributes.addFlashAttribute("result", resultArr);
 
+        return "redirect:/employees";
+    }
+
+    @RequestMapping(value = "/deleteUsers", method = {RequestMethod.GET, RequestMethod.PUT}, produces = "application/json")
+    public String deleteUsers(@RequestParam("idsToDelete") String[] idsToDelete){
+        pracownicyDAO.deleteMany(idsToDelete);
         return "redirect:/employees";
     }
 }

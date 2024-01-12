@@ -102,6 +102,7 @@
     <table class="table table-hover">
         <thead class="thead-light">
         <tr>
+            <th scope="col">x</th>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Surname</th>
@@ -117,6 +118,9 @@
         </thead>
         <tbody>
         <tr th:each="x : ${pracownicy}">
+            <td>
+                <input type="checkbox" th:id="${'selectCheckbox_' + x.idPracownika}" />
+            </td>
             <td th:text="${x.idPracownika}">1</td>
             <td th:text="${x.imie}">Fish Food</td>
             <td th:text="${x.nazwisko}">2024-01-01</td>
@@ -135,28 +139,35 @@
         <tr>
             <td colspan="10"></td>
             <td class="actions-cell">
-                <a th:href="@{/addNewUser}" class="btn btn-success">Add New User</a>
+                <a th:href="@{/addNewUser}" class="btn btn-success" style="padding: 1.1rem .75rem;">Add New User</a>
+            </td>
+            <td colspan="11">
+                <button class="btn btn-danger" onclick="deleteSelectedEmployees()">Delete Selected Employees</button>
             </td>
         </tr>
         </tfoot>
     </table>
 </div>
 
-<div class="modal" id="newUserModal">
-    <div class="modal-dialog">
+<div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="newUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 520px;" role="document">
         <div class="modal-content">
 
             <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">New User Information</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-header bg-primary text-white">
+                <h3 class="modal-title" id="newUserModalLabel mx-auto">New User Created</h3>
+                <button type="button" class="close text-white m-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <!-- Replace the information below with actual user information -->
-                <p th:text="${newUserId} + ' has been added as a new user.'"></p>
-                <p th:text="'Email: ' + ${newUserUsername}"></p>
+                <div class="alert alert-info" role="alert">
+                    <h5>Save this data, as you won't be able to restore it!</h5>
+                </div>
+                <p class="mb-1"><strong>Username:</strong> <span th:text="${newUserUsername}"></span></p>
+                <p class="mb-1"><strong>Password:</strong> <span th:text="${newUserPassword}"></span></p>
                 <!-- Add more user information as needed -->
             </div>
 
@@ -168,6 +179,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -184,6 +196,41 @@
         }
     });
 </script>
+
+<script th:inline="javascript">
+    function deleteSelectedEmployees() {
+        var selectedIds = [];
+        $(":checkbox:checked").each(function () {
+            var id = this.id.replace("selectCheckbox_", "");
+            selectedIds.push(id);
+        });
+
+        if (selectedIds.length > 0) {
+            // Create a form dynamically
+            var form = document.createElement("form");
+            form.setAttribute("method", "put");
+            form.setAttribute("action", "/deleteUsers");
+            form.style.display = "none";
+
+            // Create an input element for each selected ID
+            for (var i = 0; i < selectedIds.length; i++) {
+                var input = document.createElement("input");
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "idsToDelete");
+                input.setAttribute("value", selectedIds[i]);
+                form.appendChild(input);
+            }
+
+            // Append the form to the document body and submit it
+            document.body.appendChild(form);
+            form.submit();
+        } else {
+            alert("Please select at least one employee to delete.");
+        }
+    }
+</script>
+
+
 
 </body>
 </html>
