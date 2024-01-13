@@ -7,7 +7,48 @@
   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
   <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
 
+  <style>
+    body {
+      background-color: #f8f9fa; /* Light gray background */
+    }
 
+    .navbar {
+      background-color: #ffffff; /* White background for the navbar */
+    }
+
+    .navbar-brand img {
+      margin-right: 10px; /* Adjust the margin as needed */
+    }
+
+    .table-container {
+      margin-top: 50px; /* Adjust the margin as needed */
+      background-color: #ffffff; /* White background for the table */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff; /* Blue header background */
+      color: #ffffff; /* White text for header */
+    }
+
+    .modal-content {
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
 
@@ -65,11 +106,10 @@
 
 
 
-<div class="mt-5 tab" align="center">
-  <h1>Akwaria</h1>
+<div class="container-fluid table-container">
+  <h1 class="text-center">Akwaria</h1>
 
-  <table border="1" cellpadding="10">
-
+  <table>
     <thead>
     <tr class="table-header">
       <th>ID</th>
@@ -78,7 +118,6 @@
       <th>Salinity</th>
       <th>Pressure</th>
       <th>Number of fish</th>
-
     </tr>
     </thead>
 

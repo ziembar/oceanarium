@@ -3,10 +3,8 @@ package bada_oceanarium.SpringApplication;
 import bada_oceanarium.SpringApplication.DAOs.AdresyDAO;
 import bada_oceanarium.SpringApplication.DAOs.AkwariaDAO;
 import bada_oceanarium.SpringApplication.DAOs.PracownicyDAO;
-import bada_oceanarium.SpringApplication.DTOs.AdresyDTO;
-import bada_oceanarium.SpringApplication.DTOs.AkwariaDTO;
-import bada_oceanarium.SpringApplication.DTOs.KarmyDTO;
-import bada_oceanarium.SpringApplication.DTOs.PracownicyDTO;
+import bada_oceanarium.SpringApplication.DAOs.ZadaniaDAO;
+import bada_oceanarium.SpringApplication.DTOs.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +30,9 @@ public class AdminController implements WebMvcConfigurer {
 
     @Autowired
     private PracownicyDAO pracownicyDAO;
+
+    @Autowired
+    private ZadaniaDAO zadaniaDAO;
 
 
     @GetMapping("/main_admin")
@@ -99,5 +100,21 @@ public class AdminController implements WebMvcConfigurer {
     public String deleteUsers(@RequestParam("idsToDelete") String[] idsToDelete){
         pracownicyDAO.deleteMany(idsToDelete);
         return "redirect:/employees";
+    }
+
+
+
+
+
+    @GetMapping("/jobs")
+    public String jobs(Model model, HttpServletRequest request) {
+        String username = request.getRemoteUser();
+        model.addAttribute("username", username);
+
+        List<ZadaniaPracowniczeDTO> zadania = zadaniaDAO.list();
+
+        model.addAttribute("zadania", zadania);
+
+        return "/admin/jobs";
     }
 }

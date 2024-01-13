@@ -107,4 +107,9 @@ public class PracownicyDTO {
     public void setIdAdresu(Long idAdresu) {
         this.idAdresu = idAdresu;
     }
+
+    @Override
+    public String toString() {
+        return imie+" "+nazwisko;
+    }
 }

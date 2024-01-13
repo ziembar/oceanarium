@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link th:rel="stylesheet" th:href="@{/css/styles.css} "/>
+
+
+    <style>
+        .row{
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .card {
+            margin-bottom: 20px; /* Adjust the margin as needed */
+            text-align: center; /* Center text within the card */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .add-button {
+            margin-top: 20px; /* Adjust the margin as needed */
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-white bg-white static-top">
+    <div class="container mx-2 text-dark w-100 mw-100" style="font-weight: 500">
+        <a class="navbar-brand dark mx-5" href="/">
+            <div class="flex justify-content-center">
+                <img th:src="@{/img/logo.png}" alt="Oceanarium Logo" height="50"/>
+                <span class="font-weight-bold text-dark!">Oceanarium</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" style="background-color: #cccccc" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-white justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/main_admin}">Main</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Jobs
+                        <span class="sr-only" >(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employees}">Employees</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b><th:block th:text="${username}"></th:block></b></a>
+                </li>
+
+                <li>
+                    <form method="post" th:action="@{/logout}">
+
+                        <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <h1 class="text-center">Zadania</h1>
+
+    <div class="row">
+        <!-- Iterate over your dynamic data using th:each -->
+        <div th:each="zadanie : ${zadania}" class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Access dynamic data properties -->
+                    <h5 th:text="${zadanie.idZadania}" class="card-title"></h5>
+                    <p th:text="${zadanie.rodzajZadania}" class="card-text"></p>
+                    <a href="#" class="btn btn-primary" onclick="openReadMoreModal(this)">Read More</a>
+                    <!-- Add data attributes to store zadanie properties -->
+                    <div class="zadanie-details" th:data-id="${zadanie.idZadania}" th:data-czestotliwosc="${zadanie.czestotliwosc}"
+                         th:data-czyWykonane="${zadanie.czyWykonane}" th:data-dataRozpoczecia="${zadanie.dataRozpoczecia}"
+                         th:data-dataZakonczenia="${zadanie.dataZakonczenia}" th:data-rodzajZadania="${zadanie.rodzajZadania}"
+                         th:data-pracownicy="${zadanie.pracownicy != null ? zadanie.pracownicy.toString() : 'N/A'}"
+                         th:data-akwarium="${zadanie.akwarium != null ? zadanie.akwarium.toString() : 'N/A'}"
+                         th:data-karma="${zadanie.karma != null ? zadanie.karma.toString() : 'N/A'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button for adding a new card -->
+    <div class="add-button">
+        <button class="btn btn-success" onclick="addNewCard()">Add New Card</button>
+    </div>
+</div>
+
+<!-- Modal for Read More -->
+<div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="readMoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 520px;" role="document">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-primary text-white">
+                <h3 class="modal-title" id="readMoreModalLabel mx-auto">Edit job</h3>
+                <button type="button" class="close text-white m-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Add form for editing card details -->
+                <form id="editCardForm">
+
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="czestotliwosc">Czestotliwosc</label>
+                        <input type="text" class="form-control" id="czestotliwosc">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="czyWykonane">Czy Wykonane</label>
+                        <input type="text" class="form-control" id="czyWykonane">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataRozpoczecia">Data Rozpoczecia</label>
+                        <input type="text" class="form-control" id="dataRozpoczecia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataZakonczenia">Data Zakonczenia</label>
+                        <input type="text" class="form-control" id="dataZakonczenia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rodzajZadania">Rodzaj Zadania</label>
+                        <input type="text" class="form-control" id="rodzajZadania">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pracownicy">Pracownicy</label>
+                        <input type="text" class="form-control" id="pracownicy">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="akwarium">Akwarium</label>
+                        <input type="text" class="form-control" id="akwarium">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="karma">Karma</label>
+                        <input type="text" class="form-control" id="karma">
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteCard()">Delete Card</button>
+                <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function openReadMoreModal(button) {
+        var zadanieDetails = $(button).siblings('.zadanie-details');
+        // Set values in the modal form
+        $('#id').val(zadanieDetails.data('id'));
+        $('#czestotliwosc').val(zadanieDetails.data('czestotliwosc'));
+        $('#czyWykonane').val(zadanieDetails.data('czyWykonane'));
+        $('#dataRozpoczecia').val(zadanieDetails.data('dataRozpoczecia'));
+        $('#dataZakonczenia').val(zadanieDetails.data('dataZakonczenia'));
+        $('#rodzajZadania').val(zadanieDetails.data('rodzajZadania'));
+        $('#pracownicy').val(zadanieDetails.data('pracownicy'));
+        $('#akwarium').val(zadanieDetails.data('akwarium'));
+        $('#karma').val(zadanieDetails.data('karma'));
+
+        // Show the modal
+        $('#readMoreModal').modal('show');
+    }
+
+    function deleteCard() {
+        // Implement the logic to delete the card here
+        alert("Implement the logic to delete the card!");
+        // Close the modal
+        $('#readMoreModal').modal('hide');
+    }
+
+    function saveChanges() {
+        // Implement the logic to save changes to the card here
+        alert("Implement the logic to save changes to the card!");
+        // Close the modal
+        $('#readMoreModal').modal('hide');
+    }
+
+    function addNewCard() {
+        // Implement the logic to add a new card here
+        alert("Implement the logic to add a new card!");
+        // You may want to redirect or perform some other action after adding the card
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+
+
+
+
+</body>
+</html>

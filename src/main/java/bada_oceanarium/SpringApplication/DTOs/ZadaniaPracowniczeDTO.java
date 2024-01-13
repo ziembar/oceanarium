@@ -1,5 +1,7 @@
 package bada_oceanarium.SpringApplication.DTOs;
 
+import java.util.List;
+
 public class ZadaniaPracowniczeDTO {
     private Long idZadania;
     private String czestotliwosc;
@@ -7,6 +9,34 @@ public class ZadaniaPracowniczeDTO {
     private java.sql.Date dataRozpoczecia;
     private java.sql.Date dataZakonczenia;
     private String rodzajZadania;
+    public List<PracownicyDTO> pracownicy;
+
+    public AkwariaDTO akwarium;
+    public KarmyDTO karma;
+
+    public List<PracownicyDTO> getPracownicy() {
+        return pracownicy;
+    }
+
+    public void setPracownicy(List<PracownicyDTO> pracownicy) {
+        this.pracownicy = pracownicy;
+    }
+
+    public AkwariaDTO getAkwarium() {
+        return akwarium;
+    }
+
+    public void setAkwarium(AkwariaDTO akwarium) {
+        this.akwarium = akwarium;
+    }
+
+    public KarmyDTO getKarma() {
+        return karma;
+    }
+
+    public void setKarma(KarmyDTO karma) {
+        this.karma = karma;
+    }
 
     public Long getIdZadania() {
         return this.idZadania;

@@ -56,4 +56,9 @@ public class KarmyDTO {
     public void setIdProducenta(Long idProducenta) {
         this.idProducenta = idProducenta;
     }
+
+    @Override
+    public String toString() {
+        return nazwa;
+    }
 }

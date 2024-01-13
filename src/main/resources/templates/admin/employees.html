@@ -40,6 +40,7 @@
             background-color: #28a745;
             border-color: #28a745;
         }
+
     </style>
 </head>
 <body>
@@ -66,17 +67,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link font-weight-bold"  href="#">Main
-                        <span class="sr-only" >(current)</span>
-                    </a>
+                    <a class="nav-link" th:href="@{/main_admin}">Main</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/aquariums}">Aquariums</a>
+                    <a class="nav-link" th:href="@{/jobs}">Jobs</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/feed}">Feed</a>
+                    <a class="nav-link font-weight-bold" href="#">Employees
+                        <span class="sr-only" >(current)</span></a>
                 </li>
 
                 <li class="nav-item">
@@ -102,18 +102,18 @@
     <table class="table table-hover">
         <thead class="thead-light">
         <tr>
-            <th scope="col">x</th>
+            <th scope="col"></th>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Surname</th>
             <th scope="col">Sex</th>
             <th scope="col">Pesel</th>
-            <th scope="col">Nr telefonu</th>
+            <th scope="col">Phone number</th>
             <th scope="col">Email</th>
-            <th scope="col">Data urodzenia</th>
-            <th scope="col">Prawo jazdy</th>
-            <th scope="col">Miejsce zamieszkania</th>
-            <th scope="col">Ulica</th>
+            <th scope="col">Birth date</th>
+            <th scope="col">Driver license?</th>
+            <th scope="col">City</th>
+            <th scope="col">Street</th>
         </tr>
         </thead>
         <tbody>
@@ -139,7 +139,7 @@
         <tr>
             <td colspan="10"></td>
             <td class="actions-cell">
-                <a th:href="@{/addNewUser}" class="btn btn-success" style="padding: 1.1rem .75rem;">Add New User</a>
+                <a th:href="@{/addNewUser}" class="btn btn-success">Add New User</a>
             </td>
             <td colspan="11">
                 <button class="btn btn-danger" onclick="deleteSelectedEmployees()">Delete Selected Employees</button>

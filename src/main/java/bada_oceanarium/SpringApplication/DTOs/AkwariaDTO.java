@@ -78,4 +78,9 @@ public class AkwariaDTO {
     public void setIdOceanarium(Long idOceanarium) {
         this.idOceanarium = idOceanarium;
     }
+
+    @Override
+    public String toString() {
+        return idAkwarium.toString();
+    }
 }
