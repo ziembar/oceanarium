@@ -1,7 +1,7 @@
 package bada_oceanarium.SpringApplication.DTOs;
 
 public class KarmyDTO {
-    private Long idProduktu;
+    public Long id_produktu;
     private String nazwa;
     private java.sql.Date dataWaznosci;
     private Float waga;
@@ -10,11 +10,11 @@ public class KarmyDTO {
     public int quantity;
 
     public Long getIdProduktu() {
-        return this.idProduktu;
+        return this.id_produktu;
     }
 
-    public void setIdProduktu(Long idProduktu) {
-        this.idProduktu = idProduktu;
+    public void setIdProduktu(Long id_produktu) {
+        this.id_produktu = id_produktu;
     }
 
     public String getNazwa() {

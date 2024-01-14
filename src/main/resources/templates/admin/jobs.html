@@ -100,13 +100,82 @@
                     <h5 th:text="${zadanie.idZadania}" class="card-title"></h5>
                     <p th:text="${zadanie.rodzajZadania}" class="card-text"></p>
                     <a href="#" class="btn btn-primary" onclick="openReadMoreModal(this)">Read More</a>
-                    <!-- Add data attributes to store zadanie properties -->
-                    <div class="zadanie-details" th:data-id="${zadanie.idZadania}" th:data-czestotliwosc="${zadanie.czestotliwosc}"
-                         th:data-czyWykonane="${zadanie.czyWykonane}" th:data-dataRozpoczecia="${zadanie.dataRozpoczecia}"
-                         th:data-dataZakonczenia="${zadanie.dataZakonczenia}" th:data-rodzajZadania="${zadanie.rodzajZadania}"
-                         th:data-pracownicy="${zadanie.pracownicy != null ? zadanie.pracownicy.toString() : 'N/A'}"
-                         th:data-akwarium="${zadanie.akwarium != null ? zadanie.akwarium.toString() : 'N/A'}"
-                         th:data-karma="${zadanie.karma != null ? zadanie.karma.toString() : 'N/A'}"></div>
+                </div>
+            </div>
+            <div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="readMoreModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" style="max-width: 520px;" role="document">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-primary text-white">
+                            <h3 class="modal-title" id="readMoreModalLabel mx-auto">Edit job</h3>
+                            <button type="button" class="close text-white m-0" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <!-- Add form for editing card details -->
+                            <form id="editCardForm">
+
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="text" th:placeholder="${zadanie.idZadania}" class="form-control" id="id" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="czestotliwosc">Frequency</label>
+                                    <input type="text"  class="form-control" th:placeholder="${zadanie.czestotliwosc}" id="czestotliwosc">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="czyWykonane">Done?</label>
+                                    <input type="text" th:placeholder="${zadanie.czyWykonane}" class="form-control" id="czyWykonane">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dataRozpoczecia">Start date</label>
+                                    <input type="text" th:placeholder="${zadanie.dataRozpoczecia}" class="form-control" id="dataRozpoczecia">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dataZakonczenia">End date</label>
+                                    <input type="text" th:placeholder="${zadanie.dataZakonczenia}" class="form-control" id="dataZakonczenia">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rodzajZadania">Type of job</label>
+                                    <input type="text" th:placeholder="${zadanie.rodzajZadania}" class="form-control" id="rodzajZadania">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pracownicy">Pracownicy</label>
+                                    <select th:if="${pracownik != null}" name="pracownicy" multiple readonly th:each="pracownik : ${zadanie.pracownicy}" class="form-control" id="pracownicy">
+                                        <option th:if="${pracownik != null}" th:value="${pracownik.idPracownika}"><th:block th:text="${pracownik.toString()}"></th:block> </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="akwarium">Aquarium ID</label>
+                                    <input th:if="${zadanie.akwarium != null}" type="text" th:placeholder="${zadanie.akwarium.toString()}" class="form-control" id="akwarium">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="karma">Feed</label>
+                                    <input  th:if="${zadanie.karma != null}" type="text" th:placeholder="${zadanie.karma.toString()}" class="form-control" id="karma">
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" onclick="deleteCard()">Delete Card</button>
+                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,96 +187,10 @@
     </div>
 </div>
 
-<!-- Modal for Read More -->
-<div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="readMoreModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 520px;" role="document">
-        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header bg-primary text-white">
-                <h3 class="modal-title" id="readMoreModalLabel mx-auto">Edit job</h3>
-                <button type="button" class="close text-white m-0" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <!-- Add form for editing card details -->
-                <form id="editCardForm">
-
-                    <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="text" class="form-control" id="id" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="czestotliwosc">Czestotliwosc</label>
-                        <input type="text" class="form-control" id="czestotliwosc">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="czyWykonane">Czy Wykonane</label>
-                        <input type="text" class="form-control" id="czyWykonane">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dataRozpoczecia">Data Rozpoczecia</label>
-                        <input type="text" class="form-control" id="dataRozpoczecia">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dataZakonczenia">Data Zakonczenia</label>
-                        <input type="text" class="form-control" id="dataZakonczenia">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rodzajZadania">Rodzaj Zadania</label>
-                        <input type="text" class="form-control" id="rodzajZadania">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pracownicy">Pracownicy</label>
-                        <input type="text" class="form-control" id="pracownicy">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="akwarium">Akwarium</label>
-                        <input type="text" class="form-control" id="akwarium">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="karma">Karma</label>
-                        <input type="text" class="form-control" id="karma">
-                    </div>
-
-                </form>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="deleteCard()">Delete Card</button>
-                <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <script th:inline="javascript">
     function openReadMoreModal(button) {
-        var zadanieDetails = $(button).siblings('.zadanie-details');
-        // Set values in the modal form
-        $('#id').val(zadanieDetails.data('id'));
-        $('#czestotliwosc').val(zadanieDetails.data('czestotliwosc'));
-        $('#czyWykonane').val(zadanieDetails.data('czyWykonane'));
-        $('#dataRozpoczecia').val(zadanieDetails.data('dataRozpoczecia'));
-        $('#dataZakonczenia').val(zadanieDetails.data('dataZakonczenia'));
-        $('#rodzajZadania').val(zadanieDetails.data('rodzajZadania'));
-        $('#pracownicy').val(zadanieDetails.data('pracownicy'));
-        $('#akwarium').val(zadanieDetails.data('akwarium'));
-        $('#karma').val(zadanieDetails.data('karma'));
-
         // Show the modal
         $('#readMoreModal').modal('show');
     }

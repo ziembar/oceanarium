@@ -1,5 +1,6 @@
 package bada_oceanarium.SpringApplication.DTOs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ZadaniaPracowniczeDTO {
@@ -9,10 +10,12 @@ public class ZadaniaPracowniczeDTO {
     private java.sql.Date dataRozpoczecia;
     private java.sql.Date dataZakonczenia;
     private String rodzajZadania;
-    public List<PracownicyDTO> pracownicy;
-
-    public AkwariaDTO akwarium;
     public KarmyDTO karma;
+    public AkwariaDTO akwarium;
+
+
+    public List<PracownicyDTO> pracownicy = new ArrayList<>();
+
 
     public List<PracownicyDTO> getPracownicy() {
         return pracownicy;
@@ -20,6 +23,9 @@ public class ZadaniaPracowniczeDTO {
 
     public void setPracownicy(List<PracownicyDTO> pracownicy) {
         this.pracownicy = pracownicy;
+    }
+    public void addPracownik(PracownicyDTO pracownik) {
+        this.pracownicy.add(pracownik);
     }
 
     public AkwariaDTO getAkwarium() {

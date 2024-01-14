@@ -3,7 +3,7 @@ package bada_oceanarium.SpringApplication.DTOs;
 import java.util.List;
 
 public class AkwariaDTO {
-    private Long idAkwarium;
+    public Long idAkwarium;
     private Long pojemnosc;
     private Double zasolenie;
     private Double temperatura;
