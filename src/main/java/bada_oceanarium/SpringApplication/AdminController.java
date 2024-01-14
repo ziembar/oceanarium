@@ -1,9 +1,6 @@
 package bada_oceanarium.SpringApplication;
 
-import bada_oceanarium.SpringApplication.DAOs.AdresyDAO;
-import bada_oceanarium.SpringApplication.DAOs.AkwariaDAO;
-import bada_oceanarium.SpringApplication.DAOs.PracownicyDAO;
-import bada_oceanarium.SpringApplication.DAOs.ZadaniaDAO;
+import bada_oceanarium.SpringApplication.DAOs.*;
 import bada_oceanarium.SpringApplication.DTOs.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class AdminController implements WebMvcConfigurer {
 
     @Autowired
     private AdresyDAO adresyDAO;
+    @Autowired
+    private KarmyDAO karmyDAO;
 
     @Autowired
     private PracownicyDAO pracownicyDAO;
@@ -70,7 +69,36 @@ public class AdminController implements WebMvcConfigurer {
         model.addAttribute("pracownicy", pracusie);
         return "admin/employees";
     }
+    @GetMapping("/addNewTask")
+    public String showEmployeesForNewTask(Model model, HttpServletRequest request) {
 
+        String username = request.getRemoteUser();
+        model.addAttribute("username", username);
+
+        List<PracownicyDTO> pracusie = pracownicyDAO.list();
+        List<KarmyDTO> karma = karmyDAO.list();
+
+        model.addAttribute("karmy", karma);
+        model.addAttribute("pracownicy", pracusie);
+        return "admin/addNewTask";
+    }
+    @RequestMapping(value = "/addNewTaskAction",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.PUT})
+    public String showEmployeesForNewTask(
+            @RequestParam("czestotliwosc") String czestotliwosc,
+            @RequestParam("czyWykonane") String czyWykonane,
+            @RequestParam("dataRozpoczecia")  @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataRozpoczecia,
+            @RequestParam("dataZakonczenia")  @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataZakonczenia,
+            @RequestParam("rodzajZadania") String rodzajZadania,
+            @RequestParam(value = "karmaId", required = false) Long karmaId,
+            @RequestParam("pracownikId") Long pracownikId,
+            Model model, HttpServletRequest request) {
+        Long idZadania = zadaniaDAO.createNew(czestotliwosc,czyWykonane, new java.sql.Date(dataRozpoczecia.getTime()),
+                new java.sql.Date(dataZakonczenia.getTime()),rodzajZadania);
+        zadaniaDAO.createNewZPP(idZadania,pracownikId,karmaId);
+        return "redirect:/jobs";
+    }
     @RequestMapping(value = "/addNewUserAction",
             produces = "application/json",
             method = {RequestMethod.GET, RequestMethod.PUT})
