@@ -47,8 +47,6 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/addNewUser").setViewName("admin/addNewUser");
         registry.addViewController("/error").setViewName("error");
         registry.addViewController("/tickets_success").setViewName("tickets_success");
-
-
     }
 
     @Controller

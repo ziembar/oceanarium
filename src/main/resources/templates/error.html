@@ -59,16 +59,17 @@
 
 <div class="container error-container">
     <div class="d-inline-block" style=" width: 35%">
-        <b><span class="position-absolute font-weight-bold text-white"
-              style="font-size: xx-large;
-               text-decoration: #28a745; top: 16%; left: 47%; font-family: 'Comic Sans MS'"
-              th:text="${statusCode}"></span></b>
-        <img style="border-radius: 10px; width: 100%" th:src="@{/img/mt.png}" alt="Error image"/>
+
+        <img style="border-radius: 10px; width: 100%" th:src="@{/img/newfishnobg.png}" alt="Error image"/>
+        <b><span class="mx-auto font-weight-bold d-inline-block"
+                 style="font-size: xx-large;
+               text-decoration: #28a745; transform: translateY(-68px);"
+                 th:text="${statusCode}"></span></b>
 
     </div>
-    <h1 class="text-white text-lg-center">Whoops! We hit a snag.</h1>
+    <h1 style="margin-top: -30px;" class="text-white text-lg-center">Whoops! We hit a snag.</h1>
     <p class="lead text-white"><th:block th:text="${message}"></th:block></p>
-    <a href="/index" class="btn btn-primary btn-home">Take Me Home</a>
+    <a th:href="@{/main}" class="btn btn-primary btn-home">Take Me Home</a>
     <!-- Optional: Add more navigation options or helpful links here -->
 </div>
 

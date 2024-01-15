@@ -28,7 +28,45 @@
         }
 
         .add-button {
-            margin-top: 20px; /* Adjust the margin as needed */
+            text-align: center;
+            padding: 20px;
+            margin-top: -10px;
+        }
+         body {
+             font-family: 'Arial', sans-serif;
+         }
+
+
+        .card, .btn {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover, .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .row {
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+
+        .bg-red {
+            border: solid red;
+            box-shadow: 0 8px 16px rgba(231, 8, 0, 0.72);
+        }
+        .bg-green{
+            border: solid green;
+            box-shadow: 0 8px 16px rgba(0, 128, 0, 0.8);
+        }
+
+        .add-button {
+            margin-top: 30px;
             text-align: center;
         }
     </style>
@@ -89,16 +127,16 @@
 
 
 <div class="container">
-    <h1 class="text-center">Jobs</h1>
+    <h1 class="text-center my-4">Jobs</h1>
 
     <div class="row">
         <!-- Iterate over your dynamic data using th:each -->
         <div th:each="zadanie : ${zadania}" class="col-md-4">
-            <div class="card">
+            <div th:class="'card ' + ${zadanie.czyWykonane.equals('T') ? 'bg-green' : 'bg-red'}">
                 <div class="card-body">
                     <!-- Access dynamic data properties -->
-                    <h5 th:text="${zadanie.idZadania}" class="card-title"></h5>
-                    <p th:text="${zadanie.rodzajZadania}" class="card-text"></p>
+                    <h5 th:inline="text" class="card-title"><b>ID:</b> [[${zadanie.idZadania}]]</h5>
+                    <p th:inline="text" class="card-text"><b>Type:</b>  [[${zadanie.rodzajZadania}]]</p>
                     <a href="#" class="btn btn-primary" th:onclick="'javascript:openReadMoreModal(this, ' + ${zadanie.idZadania} + ')'"
                     >Read More</a>
                 </div>
@@ -108,7 +146,7 @@
                     <div class="modal-content">
 
                         <!-- Modal Header -->
-                        <div class="modal-header bg-primary text-white">
+                        <div style="border-radius: 10px 10px 0px 0px;" class="modal-header bg-primary text-white">
                             <h3 class="modal-title" id="readMoreModalLabel mx-auto">Details</h3>
                             <button type="button" class="close text-white m-0" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -182,8 +220,8 @@
 
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" onclick="deleteCard()">Delete Card</button>
-                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteCard()">Delete job</button>
+                            <button type="button" class="btn btn-primary" onclick="saveChanges()">Edit</button>
                         </div>
 
                     </div>
@@ -194,7 +232,7 @@
 
     <!-- Button for adding a new card -->
     <div class="add-button">
-        <button class="btn btn-success" onclick="addNewCard()">Add New Card</button>
+        <button class="btn btn-success" style="padding: 20px; margin-bottom: 40px; margin-top: -10px;" onclick="addNewCard()">Add New Job</button>
     </div>
 </div>
 
