@@ -107,7 +107,7 @@
 
 
 <div class="container-fluid table-container mx-auto w-75">
-  <h1 class="text-center">Akwaria</h1>
+  <h1 class="text-center">Aquariums</h1>
 
   <table>
     <thead>
@@ -130,7 +130,7 @@
       <td th:text="${akwarium.cisnienie}">cisnienie</td>
       <td>
         <button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#modal' + ${akwarium.idAkwarium}">
-        <span th:text="${akwarium.ileRyb}"></span> ryb
+        <span th:text="${akwarium.ileRyb}"></span> fish
       </button></td>
 
     </tr>
@@ -145,7 +145,7 @@
   <div class="modal-dialog" style="max-width: 90%" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Szczegóły ryb</h5>
+        <h5 class="modal-title">Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -154,17 +154,17 @@
         <table border="1" cellpadding="10">
           <thead>
           <tr class="table-header">
-            <th>ID Zwierzęcia</th>
-            <th>Waga</th>
-            <th>Zapotrzebowanie Kaloryczne</th>
-            <th>Kolor</th>
-            <th>Płeć</th>
-            <th>Wiek</th>
-            <th>Nazwa Polska</th>
-            <th>Nazwa Łacińska</th>
-            <th>Rodzaj</th>
-            <th>Rodzina</th>
-            <th>Rząd</th>
+            <th>ID</th>
+            <th>Weight</th>
+            <th>Calories intake</th>
+            <th>Color</th>
+            <th>Sex</th>
+            <th>Age</th>
+            <th>Name</th>
+            <th>Latin name</th>
+            <th>Genus</th>
+            <th>Family</th>
+            <th>Order</th>
           </tr>
           </thead>
           <tbody>
@@ -185,7 +185,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

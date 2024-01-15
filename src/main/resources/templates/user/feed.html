@@ -107,9 +107,8 @@
             <th scope="col">Name</th>
             <th scope="col">Expiration Date</th>
             <th scope="col">Weight (kg)</th>
-            <th scope="col">Oceanarium ID</th>
-            <th scope="col">Producer ID</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Producer</th>
+            <th scope="col" style="display: flex" class="flex justify-content-end"><span class="mr-5">Actions</span></th>
         </tr>
         </thead>
         <tbody>
@@ -118,9 +117,8 @@
             <td th:text="${feed.nazwa}">Fish Food</td>
             <td th:text="${feed.dataWaznosci}">2024-01-01</td>
             <td th:text="${feed.waga}">0.5</td>
-            <td th:text="${feed.idOceanarium}">1</td>
-            <td th:text="${feed.idProducenta}">100</td>
-            <td class="action-cell">
+            <td th:text="${feed.nazwaProducenta}">100</td>
+            <td class="action-cell flex justify-content-end" style="display: flex;padding-right: 50px">
                 <form action="/handleFeedAction" method="get">
                     <input type="hidden" name="idProduktu" th:value="${feed.idProduktu}">
                     <input type="number" class="quantity-input" name="quantity" placeholder="Qty" min="0">

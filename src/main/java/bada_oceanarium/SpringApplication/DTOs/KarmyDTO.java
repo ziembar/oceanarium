@@ -8,9 +8,34 @@ public class KarmyDTO {
     private Long idOceanarium;
     private Long idProducenta;
     public int quantity;
+    public String nazwaProducenta;
 
     public Long getIdProduktu() {
         return this.id_produktu;
+    }
+
+    public Long getId_produktu() {
+        return id_produktu;
+    }
+
+    public void setId_produktu(Long id_produktu) {
+        this.id_produktu = id_produktu;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getnazwaProducenta() {
+        return nazwaProducenta;
+    }
+
+    public void setnazwaProducenta(String nazwaProducenta) {
+        this.nazwaProducenta = nazwaProducenta;
     }
 
     public void setIdProduktu(Long id_produktu) {

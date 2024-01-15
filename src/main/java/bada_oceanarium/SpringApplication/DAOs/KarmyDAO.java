@@ -24,8 +24,9 @@ public class KarmyDAO {
 
 
     public List<KarmyDTO> list() {
-        String sql = "SELECT * FROM KARMY";
+        String sql = "SELECT K.*, P.NAZWA_PRODUCENTA FROM KARMY K JOIN PRODUCENCI P on P.ID_PRODUCENTA = K.ID_PRODUCENTA";
         List<KarmyDTO> ListKarmy = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(KarmyDTO.class));
+        System.out.println(ListKarmy.get(0).nazwaProducenta);
         return ListKarmy;
     }
 
