@@ -48,6 +48,23 @@
             margin-right: 10px; /* Add some spacing between the input and the buttons */
             display: inline-block; /* Ensure the input displays inline with the buttons */
         }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group label {
+            margin-left: 5px;
+        }
+        .scrollable-checkbox-list {
+            max-height: 250px; /* Wysokość można dostosować do potrzeb */
+            overflow-y: auto;   /* Umożliwia przewijanie wertykalne */
+            border: 1px solid #ccc; /* Opcjonalna ramka dla kontenera */
+            padding: 10px; /* Dodaje odstęp wewnątrz kontenera */
+            margin-top: 10px; /* Dodaje odstęp nad kontenerem */
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -75,7 +92,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#">
+                    <a class="nav-item" href="#">
                         <a class="nav-link" th:href="@{/jobs}">Jobs</a>
                 </li>
 
@@ -166,16 +183,15 @@
                             <div class="invalid-feedback">Food selection is required.</div>
                         </div>
                         <div class="form-label-group">
-                            <label for="pracownikId">Select Employee</label>
-                            <select id="pracownikId" name="pracownikId" class="form-control" required>
-                                <option value="">Select an employee...</option>
-                                <th:block th:each="pracownik : ${pracownicy}">
-                                    <option th:value="${pracownik.idPracownika}" th:text="${pracownik.imie} + ' ' + ${pracownik.nazwisko}"></option>
-                                </th:block>
-                            </select>
-                            <div class="invalid-feedback">Employee selection is required.</div>
+                            <label>Select Employees</label>
+                            <div class="scrollable-checkbox-list">
+                                <div th:each="pracownik : ${pracownicy}" style="margin-bottom: 10px;">
+                                    <input type="checkbox" th:id="${'pracownikId' + pracownik.idPracownika}" name="pracownikId[]" th:value="${pracownik.idPracownika}" />
+                                    <lab th:for="${'pracownikId' + pracownik.idPracownika}" th:text="${pracownik.imie + ' ' + pracownik.nazwisko}">Employee Name</lab>
+                                </div>
+                                <div class="invalid-feedback">Employee selection is required.</div>
+                            </div>
                         </div>
-
                         <button type="submit" class="btn btn-ticket btn-block">Add Task</button>
                     </form>
                 </div>
