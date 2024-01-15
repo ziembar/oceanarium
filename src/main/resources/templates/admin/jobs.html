@@ -89,7 +89,7 @@
 
 
 <div class="container">
-    <h1 class="text-center">Zadania</h1>
+    <h1 class="text-center">Jobs</h1>
 
     <div class="row">
         <!-- Iterate over your dynamic data using th:each -->
@@ -99,16 +99,17 @@
                     <!-- Access dynamic data properties -->
                     <h5 th:text="${zadanie.idZadania}" class="card-title"></h5>
                     <p th:text="${zadanie.rodzajZadania}" class="card-text"></p>
-                    <a href="#" class="btn btn-primary" onclick="openReadMoreModal(this)">Read More</a>
+                    <a href="#" class="btn btn-primary" th:onclick="'javascript:openReadMoreModal(this, ' + ${zadanie.idZadania} + ')'"
+                    >Read More</a>
                 </div>
             </div>
-            <div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="readMoreModalLabel" aria-hidden="true">
+            <div class="modal fade" th:id="${'readMoreModal'+zadanie.idZadania}" tabindex="-1" role="dialog" aria-labelledby="readMoreModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" style="max-width: 520px;" role="document">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header bg-primary text-white">
-                            <h3 class="modal-title" id="readMoreModalLabel mx-auto">Edit job</h3>
+                            <h3 class="modal-title" id="readMoreModalLabel mx-auto">Details</h3>
                             <button type="button" class="close text-white m-0" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -117,56 +118,66 @@
                         <!-- Modal Body -->
                         <div class="modal-body">
                             <!-- Add form for editing card details -->
-                            <form id="editCardForm">
+                            <div>
 
-                                <div class="form-group">
-                                    <label for="id">ID</label>
-                                    <input type="text" th:placeholder="${zadanie.idZadania}" class="form-control" id="id" readonly>
-                                </div>
+                            <div class="form-group">
+                                <p class="form-control-plaintext" th:inline="text">
+                                    <b>ID:</b> [[${zadanie.idZadania}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="czestotliwosc">Frequency</label>
-                                    <input type="text"  class="form-control" th:placeholder="${zadanie.czestotliwosc}" id="czestotliwosc">
-                                </div>
+                            <div class="form-group">
+                                <p class="form-control-plaintext" th:inline="text">
+                                    <b>Frequency:</b> [[${zadanie.czestotliwosc}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="czyWykonane">Done?</label>
-                                    <input type="text" th:placeholder="${zadanie.czyWykonane}" class="form-control" id="czyWykonane">
-                                </div>
+                            <div class="form-group">
+                                <p class="form-control-plaintext" th:inline="text">
+                                    <b>Done?:</b> [[${zadanie.czyWykonane}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="dataRozpoczecia">Start date</label>
-                                    <input type="text" th:placeholder="${zadanie.dataRozpoczecia}" class="form-control" id="dataRozpoczecia">
-                                </div>
+                            <div class="form-group">
+                                <p class="form-control-plaintext" th:inline="text">
+                                    <b>Start date:</b> [[${zadanie.dataRozpoczecia}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="dataZakonczenia">End date</label>
-                                    <input type="text" th:placeholder="${zadanie.dataZakonczenia}" class="form-control" id="dataZakonczenia">
-                                </div>
+                            <div class="form-group">
+                                <p class="form-control-plaintext" th:inline="text">
+                                    <b>End date:</b> [[${zadanie.dataZakonczenia}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="rodzajZadania">Type of job</label>
-                                    <input type="text" th:placeholder="${zadanie.rodzajZadania}" class="form-control" id="rodzajZadania">
-                                </div>
+                            <div class="form-group">
+                                <p class="form-control-plaintext" th:inline="text">
+                                    <b>Type of job:</b> [[${zadanie.rodzajZadania}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="pracownicy">Pracownicy</label>
-                                    <select th:if="${pracownik != null}" name="pracownicy" multiple readonly th:each="pracownik : ${zadanie.pracownicy}" class="form-control" id="pracownicy">
-                                        <option th:if="${pracownik != null}" th:value="${pracownik.idPracownika}"><th:block th:text="${pracownik.toString()}"></th:block> </option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label for="pracownicy"><b>Employees:</b></label>
+                                <p th:if="${zadanie.pracownicy != null}" id="pracownicy" class="form-control-plaintext">
+                                    <th:block  th:each="pracownik : ${zadanie.pracownicy}">
+                                        <span style="margin-left: 30px" th:inline="text" th:text="${pracownik.toString()}"></span>
+                                    </th:block>
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="akwarium">Aquarium ID</label>
-                                    <input th:if="${zadanie.akwarium != null}" type="text" th:placeholder="${zadanie.akwarium.toString()}" class="form-control" id="akwarium">
-                                </div>
+                            <div th:if="${zadanie.akwarium != null}" class="form-group">
+                                <p id="akwarium" class="form-control-plaintext" th:inline="text">
+                                    <b>Aquarium ID:</b> [[${zadanie.akwarium}]]
+                                </p>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="karma">Feed</label>
-                                    <input  th:if="${zadanie.karma != null}" type="text" th:placeholder="${zadanie.karma.toString()}" class="form-control" id="karma">
-                                </div>
+                            <div th:if="${zadanie.karma != null}" class="form-group">
+                                <p id="karma" class="form-control-plaintext" th:inline="text">
+                                    <b>Feed:</b> [[${zadanie.karma}]]
+                                </p>
+                            </div>
 
-                            </form>
+                        </div>
                         </div>
 
                         <!-- Modal Footer -->
@@ -190,9 +201,9 @@
 
 
 <script th:inline="javascript">
-    function openReadMoreModal(button) {
+    function openReadMoreModal(button, taskId) {
         // Show the modal
-        $('#readMoreModal').modal('show');
+        $('#readMoreModal'+taskId).modal('show');
     }
 
     function deleteCard() {
