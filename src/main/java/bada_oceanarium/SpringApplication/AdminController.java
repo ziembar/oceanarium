@@ -147,4 +147,12 @@ public class AdminController implements WebMvcConfigurer {
 
         return "/admin/jobs";
     }
+
+
+    @RequestMapping(value = "/deleteJob", method = {RequestMethod.GET, RequestMethod.PUT}, produces = "application/json")
+    public String deleteJob(@RequestParam("jobId") String id){
+        zadaniaDAO.delete(id);
+        return "redirect:/jobs";
+    }
+
 }

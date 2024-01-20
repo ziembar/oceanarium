@@ -40,14 +40,14 @@ public class ZadaniaDAO {
             resultList.addAll(values);
         }
 
-        for (ZadaniaPracowniczeDTO zp: resultList) {
-            System.out.println(zp.getIdZadania());
-            System.out.println(zp.getCzestotliwosc());
-            for (PracownicyDTO p:zp.getPracownicy()) {
-                System.out.println(p.toString());
-            }
-            System.out.println("===========================");
-        }
+//        for (ZadaniaPracowniczeDTO zp: resultList) {
+//            System.out.println(zp.getIdZadania());
+//            System.out.println(zp.getCzestotliwosc());
+//            for (PracownicyDTO p:zp.getPracownicy()) {
+//                System.out.println(p.toString());
+//            }
+//            System.out.println("===========================");
+//        }
         return resultList;
     }
     public Long createNew(String czestotliwosc, String czyWykon, java.sql.Date dataRozp, java.sql.Date dataZakon,String rodzaj){
@@ -71,4 +71,12 @@ public class ZadaniaDAO {
         jdbcTemplate.update(sql, idZadania, idPracownika, idProduktu);
     }
 
+    public void delete(String id){
+        jdbcTemplate.update(
+                "BEGIN " +
+                        "DELETE FROM ZADANIE_PRACOWNICZE_PRACOWNICY WHERE id_zadania = ?; " +
+                        "DELETE FROM ZADANIA_PRACOWNICZE WHERE ID_ZADANIA = ?; " +
+                        "COMMIT; " +
+                        "END;", id, id);
+    }
 }

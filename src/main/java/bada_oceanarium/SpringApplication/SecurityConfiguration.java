@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/index", "/tickets","/addTicket", "/error", "/webjars/**", "/img/**", "/css/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/addTicket").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/deleteUsers", "addNewUserAction").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/deleteUsers", "/deleteJob", "addNewUserAction").hasAuthority("ADMIN")
                         .requestMatchers("/main_admin","/employees","/addNewUser", "/jobs","/addNewTask","/addNewTaskAction").hasAuthority("ADMIN")
                         .requestMatchers("/main_user", "aquariums","/feed","/addFeed","/addNewFeed","/producers").hasAuthority("USER")
                         .anyRequest().permitAll() //było auth ale nie dziala

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.sql.Date;
@@ -97,9 +98,20 @@ public class PracownicyDAO {
 
         return randomString.toString();
     }
+    @Transactional
     public void deleteMany(String[] ids) {
         String idsPlaceholders = String.join(",", Collections.nCopies(ids.length, "?"));
-        String sql = "DELETE FROM PRACOWNICY WHERE ID_PRACOWNIKA IN (" + idsPlaceholders + ")";
-        jdbcTemplate.update(sql, (Object[]) ids);
+
+        String deleteZadaniePracowniczeSql = "DELETE FROM ZADANIE_PRACOWNICZE_PRACOWNICY WHERE ID_PRACOWNIKA IN (" + idsPlaceholders + ")";
+        jdbcTemplate.update(deleteZadaniePracowniczeSql, (Object[]) ids);
+
+        String deleteCertyfikatySql = "DELETE FROM PRACOWNICY_CERTYFIKATY WHERE ID_PRACOWNIKA IN (" + idsPlaceholders + ")";
+        jdbcTemplate.update(deleteCertyfikatySql, (Object[]) ids);
+
+        String deleteUmowySql = "DELETE FROM UMOWY_PRACOWNICZE WHERE ID_PRACOWNIKA IN (" + idsPlaceholders + ")";
+        jdbcTemplate.update(deleteUmowySql, (Object[]) ids);
+
+        String deletePracownicySql = "DELETE FROM PRACOWNICY WHERE ID_PRACOWNIKA IN (" + idsPlaceholders + ")";
+        jdbcTemplate.update(deletePracownicySql, (Object[]) ids);
     }
 }

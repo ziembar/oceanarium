@@ -220,7 +220,7 @@
 
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" onclick="deleteCard()">Delete job</button>
+                            <button type="button" class="btn btn-danger" th:onclick="'javascript:deleteJob(this, ' + ${zadanie.idZadania} + ')'">Delete job</button>
                             <button type="button" class="btn btn-primary" onclick="saveChanges()">Edit</button>
                         </div>
 
@@ -244,11 +244,26 @@
         $('#readMoreModal'+taskId).modal('show');
     }
 
-    function deleteCard() {
-        // Implement the logic to delete the card here
-        alert("Implement the logic to delete the card!");
-        // Close the modal
-        $('#readMoreModal').modal('hide');
+    function deleteJob(button, taskId) {
+        if (confirm("Are you sure you want to delete this job?")) {
+            // Create a form dynamically
+            var form = document.createElement("form");
+            form.setAttribute("method", "put");  // Change to 'post' for your use case
+            form.setAttribute("action", "/deleteJob");
+            form.style.display = "none";
+
+            // Create an input element for the task ID
+            var input = document.createElement("input");
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", "jobId");
+            input.setAttribute("value", taskId);
+            form.appendChild(input);
+
+            // Append the form to the document body and submit it
+            document.body.appendChild(form);
+            form.submit();
+            $('#readMoreModal'+taskId).modal('hide');
+        }
     }
 
     function saveChanges() {
