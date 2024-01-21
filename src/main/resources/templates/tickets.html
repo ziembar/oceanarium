@@ -97,6 +97,16 @@
             todayHighlight: true,
             startDate: new Date() //Ustawia dzisiejszą datę jako najwcześniejszą możliwą do wyboru
         });
+        $('form.needs-validation').on('submit', function(event) {
+            if (!this.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                $(this).addClass('was-validated');
+
+                // Display a custom error message or perform any other action here
+                //alert("Please fill all the required fields correctly.");
+            }
+        });
     });
 </script>
 </body>

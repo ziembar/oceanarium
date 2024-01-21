@@ -174,7 +174,7 @@
                         </div>
                         <div class="form-label-group" id="foodSelection" style="display: none;">
                             <label for="karmaId">Select Food</label>
-                            <select id="karmaId" name="karmaId" class="form-control" required>
+                            <select id="karmaId" name="karmaId" class="form-control">
                                 <option value="">Select a food type...</option>
                                 <th:block th:each="karm : ${karmy}">
                                     <option th:value="${karm.idProduktu}" th:text="${karm.nazwa}"></option>
@@ -218,6 +218,16 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form.needs-validation');
+
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                // You can replace this alert with more sophisticated handling
+            }
+            form.classList.add('was-validated');
+        });
         fetch('/producers')
             .then(response => response.json())
             .then(data => {

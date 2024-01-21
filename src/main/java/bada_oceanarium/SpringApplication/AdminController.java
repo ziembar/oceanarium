@@ -92,12 +92,14 @@ public class AdminController implements WebMvcConfigurer {
             @RequestParam("dataZakonczenia")  @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataZakonczenia,
             @RequestParam("rodzajZadania") String rodzajZadania,
             @RequestParam(value = "karmaId", required = false) Long karmaId,
-            @RequestParam("pracownikId[]") List<Long> pracownikId,
+            @RequestParam(value = "pracownikId[]", required = false, defaultValue = "") List<Long> pracownikId,
             Model model, HttpServletRequest request) {
         Long idZadania = zadaniaDAO.createNew(czestotliwosc,czyWykonane, new java.sql.Date(dataRozpoczecia.getTime()),
                 new java.sql.Date(dataZakonczenia.getTime()),rodzajZadania);
-        for(Long pracID : pracownikId) {
-            zadaniaDAO.createNewZPP(idZadania, pracID, karmaId);
+        if(!pracownikId.isEmpty()) {
+            for (Long pracID : pracownikId) {
+                zadaniaDAO.createNewZPP(idZadania, pracID, karmaId);
+            }
         }
         return "redirect:/jobs";
     }

@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -26,6 +28,12 @@ public class KarmyDAO {
     public List<KarmyDTO> list() {
         String sql = "SELECT K.*, P.NAZWA_PRODUCENTA FROM KARMY K JOIN PRODUCENCI P on P.ID_PRODUCENTA = K.ID_PRODUCENTA";
         List<KarmyDTO> ListKarmy = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(KarmyDTO.class));
+        Collections.sort(ListKarmy, new Comparator<KarmyDTO>() {
+            @Override
+            public int compare(KarmyDTO o1, KarmyDTO o2) {
+                return Long.compare(o1.getIdProduktu(), o2.getIdProduktu()); // Zakładam, że getId() zwraca wartość ID.
+            }
+        });
         System.out.println(ListKarmy.get(0).nazwaProducenta);
         return ListKarmy;
     }
